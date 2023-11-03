@@ -26,10 +26,9 @@ export const SearchInput = () => {
             ease-in-out 
             duration-200 
             shadow-inner 
-            border-[1px] 
-            border-primary/10 
-            bg-primary-foreground 
-            dark:bg-primary/5 
+            border-[1px]
+            dark:border-primary/40
+            dark:bg-primary/5
             placeholder:text-primary/30 
             placeholder:text-sm 
             placeholder:select-none 
