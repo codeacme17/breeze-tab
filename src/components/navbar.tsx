@@ -36,7 +36,7 @@ export const Navbar = () => {
             </DialogHeader>
 
             <div className="flex flex-col items-center justify-center text-primary/60 space-y-0 -mt-6">
-              <div className="mb-3">
+              <div className="mb-2">
                 <img src="/logo.png" alt="Breeze Tab Logo" className="w-24" />
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
