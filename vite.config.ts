@@ -14,12 +14,12 @@ function generateManifest() {
   }
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     webExtension({
       manifest: generateManifest,
+      additionalInputs: ['src/main.html'],
     }),
   ],
   resolve: {
