@@ -2,6 +2,8 @@
   "name": "breeze-tab",
   "private": true,
   "version": "1.0.0",
+  "author": "leyoonafr <github.com/codeacme17>",
+  "description": "A browser new tab extension, similar to Chrome tab but better",
   "type": "module",
   "scripts": {
     "dev": "vite",
