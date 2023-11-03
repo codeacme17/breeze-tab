@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { useTheme } from '@/contexts/theme-provider'
 import { cn } from '@/lib/utils'
-import { Sun, Moon } from 'lucide-react'
+import { Sun, Moon, AlignLeft, AlignRight } from 'lucide-react'
+import { Button } from './ui/button'
 
 export const Navbar = () => {
   const { theme, setTheme } = useTheme()
+
+  const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <nav className="fixed top-0 py-4 px-7 w-full">
@@ -28,6 +32,18 @@ export const Navbar = () => {
               )}
             </div>
           </button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="w-7 h-7 ml-4"
+            onClick={() => setIsExpanded(isExpanded ? false : true)}>
+            {isExpanded ? (
+              <AlignLeft className="w-6 h-6" />
+            ) : (
+              <AlignRight className="w-6 h-6 stroke-primary/60" />
+            )}
+          </Button>
         </div>
       </section>
     </nav>
