@@ -22,13 +22,13 @@ export const Navbar = () => {
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             <div
               className={cn(
-                'p-0.5 rounded-full w-[20px] h-[20px] flex justify-center items-center ease-in duration-200',
-                theme === 'dark' ? 'translate-x-6' : 'translate-x-1'
+                'p-0.5 rounded-full w-[26px] h-[20px] flex justify-center items-center ease-in duration-200',
+                theme === 'dark' ? 'translate-x-5' : 'translate-x-1'
               )}>
               {theme === 'dark' ? (
-                <Moon className="w-3 h-3 fill-current" />
+                <Moon className="w-4 h-4 stroke-1" />
               ) : (
-                <Sun className="w-3 h-3" />
+                <Sun className="w-4 h-4" />
               )}
             </div>
           </button>
