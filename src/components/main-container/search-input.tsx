@@ -1,8 +1,45 @@
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { SEARCH_ENGINE } from '@/lib/constants'
+
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
 
+type SearchEngine = 'google' | 'bing' | 'baidu'
+
 export const SearchInput = () => {
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const [searchEngine, setSearchEngine] = useState<SearchEngine>('bing')
+  const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
+    SEARCH_ENGINE[searchEngine] || ''
+  )
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Tab') switchEngine(e)
+    if (e.key === 'Enter') runSearchEngine()
+  }
+
+  const runSearchEngine = () => {
+    if (!searchInputRef.current || !searchInputRef.current.value.trim()) return
+    const searchInput = searchInputRef.current.value.trim()
+    const targetUrl = searchEngineUrl + searchInput
+    window.location = targetUrl as unknown as Location
+  }
+
+  const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setSearchEngine((prev: SearchEngine) => {
+      if (prev === 'bing') return 'google'
+      else if (prev === 'google') return 'baidu'
+      else if (prev === 'baidu') return 'bing'
+      return prev
+    })
+  }
+
+  useEffect(() => {
+    setSearchEngineUrl(SEARCH_ENGINE[searchEngine] || '')
+  }, [searchEngine])
+
   return (
     <section className="w-[620px] relative">
       <label
@@ -13,6 +50,8 @@ export const SearchInput = () => {
 
       <input
         id="search-input"
+        ref={searchInputRef}
+        onKeyDown={handleKeyDown}
         type="text"
         className={cn(` 
             w-full 
@@ -38,9 +77,27 @@ export const SearchInput = () => {
       />
 
       <div className="absolute top-1/2 -translate-y-1/2 right-4 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
-        <BingIcon classname="fill-primary/60 mr-2" />
-        <GoogleIcon classname="fill-primary/60 mr-2" />
-        <BaiduIcon classname="fill-primary/60" />
+        <BingIcon
+          classname={cn(
+            'fill-primary/60 mr-2 cursor-pointer',
+            searchEngine === 'bing' ? 'fill-blue-500' : ''
+          )}
+          onClick={() => setSearchEngine('bing')}
+        />
+        <GoogleIcon
+          classname={cn(
+            'fill-primary/60 mr-2 cursor-pointer',
+            searchEngine === 'google' ? 'fill-blue-500' : ''
+          )}
+          onClick={() => setSearchEngine('google')}
+        />
+        <BaiduIcon
+          classname={cn(
+            'fill-primary/60 cursor-pointer',
+            searchEngine === 'baidu' ? 'fill-blue-500' : ''
+          )}
+          onClick={() => setSearchEngine('baidu')}
+        />
       </div>
     </section>
   )
