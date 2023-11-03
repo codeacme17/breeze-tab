@@ -48,55 +48,66 @@ export const SearchInput = () => {
         <Search className="stroke-primary/70" />
       </label>
 
+      {/* Searh Input */}
       <input
         id="search-input"
         ref={searchInputRef}
         onKeyDown={handleKeyDown}
         type="text"
         className={cn(` 
-            w-full 
-            h-12 
-            pl-14
-            pr-32 
-            text-base 
-            font-light
-            outline-none 
-            rounded-3xl 
-            ease-in-out 
-            duration-200 
-            shadow-inner 
-            border-[1px]
-            dark:border-primary/40
-            dark:bg-primary/5
-            placeholder:text-primary/30 
-            placeholder:text-sm 
-            placeholder:select-none 
-            focus:rounded-md 
-            `)}
+          w-full 
+          h-12 
+          pl-14
+          pr-32 
+          text-base 
+          font-light
+          outline-none 
+          rounded-3xl 
+          ease-in-out 
+          duration-200 
+          shadow-inner 
+          border-[1px]
+          dark:border-primary/40
+          dark:bg-primary/5
+          placeholder:text-primary/30 
+          placeholder:text-sm 
+          placeholder:select-none 
+          focus:rounded-md`)}
         placeholder="SEARCH YOU WANT"
       />
 
-      <div className="absolute top-1/2 -translate-y-1/2 right-4 flex items-center ease-in-out duration-300 transition-[fill,opacity]">
+      {/* Search Engien Buttons */}
+      <div
+        className={`
+          absolute 
+          top-1/2 
+          -translate-y-1/2 
+          right-4 
+          flex 
+          items-center 
+          ease-in-out 
+          duration-300 
+          transition-[fill,opacity]`}>
         <BingIcon
+          onClick={() => setSearchEngine('bing')}
           classname={cn(
             'fill-primary/60 mr-2 cursor-pointer',
             searchEngine === 'bing' ? 'fill-blue-500' : ''
           )}
-          onClick={() => setSearchEngine('bing')}
         />
         <GoogleIcon
+          onClick={() => setSearchEngine('google')}
           classname={cn(
             'fill-primary/60 mr-2 cursor-pointer',
             searchEngine === 'google' ? 'fill-blue-500' : ''
           )}
-          onClick={() => setSearchEngine('google')}
         />
         <BaiduIcon
+          onClick={() => setSearchEngine('baidu')}
           classname={cn(
             'fill-primary/60 cursor-pointer',
             searchEngine === 'baidu' ? 'fill-blue-500' : ''
           )}
-          onClick={() => setSearchEngine('baidu')}
         />
       </div>
     </section>
