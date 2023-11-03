@@ -35,12 +35,12 @@ export const Navbar = () => {
               </Button>
             </DialogHeader>
 
-            <div className="flex flex-col items-center justify-center text-primary/60 space-y-0 -mt-6">
+            <div className="flex flex-col items-center justify-center text-primary/60 -mt-6">
               <div className="mb-2">
                 <img src="/logo.png" alt="Breeze Tab Logo" className="w-24" />
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
-              <p className="text-sm">
+              <p className="text-sm mt-1">
                 version
                 <code className="ml-1 px-2 py-0.5 bg-primary/30 rounded-lg">
                   v{version}

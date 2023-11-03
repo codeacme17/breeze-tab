@@ -73,7 +73,7 @@ export const SearchInput = () => {
           placeholder:text-sm 
           placeholder:select-none 
           focus:rounded-md`)}
-        placeholder="SEARCH YOU WANT"
+        placeholder="Breezing through the web"
       />
 
       {/* Search Engien Buttons */}
