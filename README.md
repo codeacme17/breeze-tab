@@ -1,9 +1,10 @@
 <br />
 
 <p align="center"> 
-  <img src="/public/logo.png" />
+  <img src="/public/logo.png" width="180" />
 </p>
 
+<samp>
 <h1 align="center"> 
 Breeze Tab
 </h1>
@@ -11,5 +12,6 @@ Breeze Tab
 <p align="center"> 
 A browser new tab extension, similar to Chrome tab but better
 </p>
+</samp>
 
 <br />
