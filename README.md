@@ -1,8 +1,15 @@
-![Github](https://github.com/codeacme17/breeze-tab/assets/67408722/1721f559-c1e8-4863-8a88-0485d410f022)
+<br />
 
-<!--
-# Breeze Tab
+<p align="center"> 
+  <img src="/public/logo.png" />
+</p>
 
+<h1 align="center"> 
+Breeze Tab
+</h1>
+
+<p align="center"> 
 A browser new tab extension, similar to Chrome tab but better
--->
+</p>
 
+<br />
