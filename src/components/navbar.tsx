@@ -21,9 +21,13 @@ export const Navbar = () => {
       <section className="flex justify-between items-center">
         <Dialog>
           <DialogTrigger>
-            <img src="/logo.png" alt="Breeze Tab Logo" className="w-6" />
+            <img
+              src="/logo.png"
+              alt="Breeze Tab Logo"
+              className="w-6 select-none"
+            />
           </DialogTrigger>
-          <DialogContent className="bg-primary/10">
+          <DialogContent className="bg-background">
             <DialogHeader className="-mt-4">
               <Button
                 size="icon"
@@ -35,14 +39,22 @@ export const Navbar = () => {
               </Button>
             </DialogHeader>
 
-            <div className="flex flex-col items-center justify-center text-primary/60 -mt-6">
-              <div className="mb-2">
-                <img src="/logo.png" alt="Breeze Tab Logo" className="w-24" />
+            <div className="flex flex-col items-center justify-center text-foreground -mt-5">
+              <div className="mb-4 w-24 h-24 relative">
+                <img
+                  src="/logo.png"
+                  alt="Breeze Tab Logo"
+                  className="w-24 absolute z-10"
+                />
+                <img
+                  src="/logo.png"
+                  alt="Breeze Tab Logo"
+                  className="w-24 blur-lg absolute"
+                />
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
               <p className="text-sm mt-1">
-                version
-                <code className="ml-1 px-2 py-0.5 bg-primary/30 rounded-lg">
+                <code className="ml-1 px-2 py-0.5 bg-secondary-foreground/30 rounded-lg">
                   v{version}
                 </code>
               </p>
@@ -52,7 +64,7 @@ export const Navbar = () => {
 
         <div className="ml-auto flex items-center">
           <button
-            className="shadow-inner bg-primary/5 rounded-full w-12 relative h-6"
+            className="shadow-inner bg-muted-foreground/5 rounded-full w-12 relative h-6"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
             <div
               className={cn(
@@ -70,12 +82,12 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="w-7 h-7 ml-4"
+            className="w-8 h-8 ml-4"
             onClick={() => setIsExpanded(isExpanded ? false : true)}>
             {isExpanded ? (
-              <AlignLeft className="w-6 h-6" />
+              <AlignLeft className="w-6 h-6 stroke-primary" />
             ) : (
-              <AlignRight className="w-6 h-6 stroke-primary/60" />
+              <AlignRight className="w-6 h-6 stroke-muted-foreground/60" />
             )}
           </Button>
         </div>

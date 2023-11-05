@@ -45,7 +45,7 @@ export const SearchInput = () => {
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
         htmlFor="search-input">
-        <Search className="stroke-primary/70" />
+        <Search className="stroke-muted-foreground/50" />
       </label>
 
       {/* Searh Input */}
@@ -67,9 +67,9 @@ export const SearchInput = () => {
           duration-200 
           shadow-inner 
           border-[1px]
-          dark:border-primary/40
-          dark:bg-primary/5
-          placeholder:text-primary/30 
+          bg-background/60
+          dark:border-background-foreground
+          placeholder:text-muted-foreground/50 
           placeholder:text-sm 
           placeholder:select-none 
           focus:rounded-md`)}
@@ -91,22 +91,22 @@ export const SearchInput = () => {
         <BingIcon
           onClick={() => setSearchEngine('bing')}
           classname={cn(
-            'fill-primary/60 mr-2 cursor-pointer',
-            searchEngine === 'bing' ? 'fill-blue-500' : ''
+            'fill-muted-foreground/50 mr-2 cursor-pointer',
+            searchEngine === 'bing' ? 'fill-primary' : ''
           )}
         />
         <GoogleIcon
           onClick={() => setSearchEngine('google')}
           classname={cn(
-            'fill-primary/60 mr-2 cursor-pointer',
-            searchEngine === 'google' ? 'fill-blue-500' : ''
+            'fill-muted-foreground/50 mr-2 cursor-pointer',
+            searchEngine === 'google' ? 'fill-primary' : ''
           )}
         />
         <BaiduIcon
           onClick={() => setSearchEngine('baidu')}
           classname={cn(
-            'fill-primary/60 cursor-pointer',
-            searchEngine === 'baidu' ? 'fill-blue-500' : ''
+            'fill-muted-foreground/50 cursor-pointer',
+            searchEngine === 'baidu' ? 'fill-primary' : ''
           )}
         />
       </div>
