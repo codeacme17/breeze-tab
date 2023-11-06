@@ -45,8 +45,14 @@ export const SearchInput = () => {
     setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
   }, [searchEngine])
 
+  const [isExpend] = useLocalStorage('bz:is-fav-expend', false)
+
   return (
-    <section className="w-[620px] relative">
+    <section
+      className={cn(
+        'w-full relative transition-[margin]',
+        isExpend ? 'mt-32' : 'mt-56'
+      )}>
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
         htmlFor="search-input">
