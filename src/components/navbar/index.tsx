@@ -70,7 +70,7 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="w-8 h-8 mr-2"
+            className="w-8 h-8 mr-5"
             onClick={() => setIsExpanded(isExpanded ? false : true)}>
             {isExpanded ? (
               <AlignLeft className="w-5 h-5 stroke-primary" />

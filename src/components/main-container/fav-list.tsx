@@ -25,7 +25,7 @@ export const FavList = () => {
   return (
     <section className="w-full flex flex-wrap mt-2">
       {favList.map((item) => (
-        <ContextMenu>
+        <ContextMenu key={item.url}>
           <ContextMenuTrigger
             className="
               h-32 

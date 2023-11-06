@@ -2,6 +2,7 @@ import { useTheme } from '@/contexts/theme-provider'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { useLocalStore } from '@/store'
+import { COLORS } from '@/lib/constants'
 
 import {
   DropdownMenu,
@@ -12,8 +13,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
-import { Button } from '@/components/ui/button'
 import { Settings, Moon, Layers2, Check } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+type Color = keyof typeof COLORS
 
 export const SettingMenu = () => {
   const { theme, setTheme } = useTheme()
@@ -22,16 +25,30 @@ export const SettingMenu = () => {
     (state) => state.troggleIsExpendFav
   )
 
-  const [color, setColor] = useLocalStorage('color', 'red')
+  const [color, setColor] = useLocalStorage<Color>('color', 'gray')
+  const [colorCollection, setColorCollection] = useState<string[]>([])
 
-  const colorMap = ['gray', 'red', 'blue']
+  useEffect(() => {
+    const colorMap = []
+    for (const key in COLORS) colorMap.push(key)
+    setColorCollection(colorMap)
+  }, [])
+
+  useEffect(() => {
+    const head = document.getElementsByTagName('head')[0]
+    const existingStylesheet = document.getElementById('SYN_CSS')
+    existingStylesheet && existingStylesheet.remove()
+
+    const stylesheet = document.createElement('style')
+    stylesheet.id = 'SYN_CSS'
+    stylesheet.innerText = COLORS[color!].value
+    head.appendChild(stylesheet)
+  }, [color])
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Button variant="ghost" size="icon" className="w-8 h-8">
-          <Settings className="w-5 h-5 stroke-muted-foreground/60" />
-        </Button>
+        <Settings className="w-5 h-5 stroke-muted-foreground/60" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-60">
@@ -66,18 +83,22 @@ export const SettingMenu = () => {
         {/* Colors switch */}
         <DropdownMenuLabel>Color</DropdownMenuLabel>
         <DropdownMenuItem>
-          {colorMap.map((item) => (
+          {colorCollection.map((item) => (
             <button
-              className="flex h-9 w-9 items-center justify-center rounded-full border-2 text-xs border-transparent"
+              className="flex h-7 w-7 mr-2 items-center justify-center rounded-full border-[1px] border-foreground/30"
               data-state="closed"
-              onClick={() => setColor(item)}>
+              key={item}
+              onClick={() => setColor(item as Color)}>
               <span
                 className={cn(
-                  `flex h-6 w-6 items-center justify-center rounded-full bg-${item}-500`,
+                  `flex h-7 w-7 items-center justify-center rounded-full`,
                   {
                     'border-2 border-foreground/70': color === item,
                   }
-                )}>
+                )}
+                style={{
+                  backgroundColor: COLORS[item as Color].main,
+                }}>
                 {color === item && <Check className="w-3 h-3" />}
               </span>
             </button>
