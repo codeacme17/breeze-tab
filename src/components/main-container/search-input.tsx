@@ -52,7 +52,7 @@ export const SearchInput = () => {
     <section
       className={cn(
         'w-full relative transition-[margin]',
-        isExpendFav ? 'mt-32' : 'mt-56'
+        isExpendFav ? 'mt-40' : 'mt-56'
       )}>
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
@@ -104,21 +104,21 @@ export const SearchInput = () => {
           onClick={() => setSearchEngine('bing')}
           classname={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'bing' ? 'fill-primary' : ''
+            searchEngine === 'bing' ? 'fill-primary/70' : ''
           )}
         />
         <GoogleIcon
           onClick={() => setSearchEngine('google')}
           classname={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'google' ? 'fill-primary' : ''
+            searchEngine === 'google' ? 'fill-primary/70' : ''
           )}
         />
         <BaiduIcon
           onClick={() => setSearchEngine('baidu')}
           classname={cn(
             'fill-muted-foreground/50 cursor-pointer',
-            searchEngine === 'baidu' ? 'fill-primary' : ''
+            searchEngine === 'baidu' ? 'fill-primary/70' : ''
           )}
         />
       </div>
