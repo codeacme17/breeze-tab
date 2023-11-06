@@ -20,7 +20,8 @@
     "react-use": "^17.4.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "webextension-polyfill": "^0.10.0"
+    "webextension-polyfill": "^0.10.0",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",

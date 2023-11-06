@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
+import { useLocalStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
@@ -45,13 +46,13 @@ export const SearchInput = () => {
     setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
   }, [searchEngine])
 
-  const [isExpend] = useLocalStorage('bz:is-fav-expend', false)
+  const isExpendFav = useLocalStore((state) => state.isExpendFav)
 
   return (
     <section
       className={cn(
         'w-full relative transition-[margin]',
-        isExpend ? 'mt-32' : 'mt-56'
+        isExpendFav ? 'mt-32' : 'mt-56'
       )}>
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
