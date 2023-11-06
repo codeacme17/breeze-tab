@@ -10,17 +10,17 @@ import { Plus, Pencil, Trash2 } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 
 export type FavItem = {
-  name: string
+  label: string
   url: string
-  iconUrl: string
+  logoUrl: string
 }
 
 export const FavList = () => {
   const favList: FavItem[] = [
     {
-      name: 'Github',
+      label: 'Github',
       url: 'https://github.com',
-      iconUrl:
+      logoUrl:
         'https://github.githubassets.com/favicons/favicon-dark.png',
     },
   ]
@@ -59,11 +59,11 @@ export const FavList = () => {
             ">
             <div onClick={() => window.location.assign(item.url)}>
               <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
-                <img src={item.iconUrl} className="w-6 h-6" />
+                <img src={item.logoUrl} className="w-6 h-6" />
               </div>
 
               <p className="text-sm mt-2 text-muted-foreground/70">
-                {item.name}
+                {item.label}
               </p>
             </div>
           </ContextMenuTrigger>
