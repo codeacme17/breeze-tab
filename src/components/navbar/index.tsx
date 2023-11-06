@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { useTheme } from '@/contexts/theme-provider'
-import { cn } from '@/lib/utils'
-import { version } from '../../package.json'
+import { version } from '../../../package.json'
 
 import {
   Dialog,
@@ -9,16 +7,18 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Sun, Moon, AlignLeft, AlignRight, Github } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
+import { AlignLeft, AlignRight, Github } from 'lucide-react'
+import { SettingMenu } from './setting-menu'
 
 export const Navbar = () => {
-  const { theme, setTheme } = useTheme()
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <nav className="fixed top-0 py-4 px-7 w-full">
       <section className="flex justify-between items-center">
+        {/* Logo & Product Detail Dialog */}
         <Dialog>
           <DialogTrigger>
             <img
@@ -33,7 +33,9 @@ export const Navbar = () => {
                 size="icon"
                 variant="ghost"
                 onClick={() =>
-                  window.open('https://github.com/codeacme17/breeze-tab')
+                  window.open(
+                    'https://github.com/codeacme17/breeze-tab'
+                  )
                 }>
                 <Github className="w-4 h-4" />
               </Button>
@@ -62,34 +64,23 @@ export const Navbar = () => {
           </DialogContent>
         </Dialog>
 
+        {/* Right Buttons */}
         <div className="ml-auto flex items-center">
-          <button
-            className="shadow-inner bg-muted-foreground/5 rounded-full w-12 relative h-6"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-            <div
-              className={cn(
-                'p-0.5 rounded-full w-[26px] h-[20px] flex justify-center items-center ease-in duration-200',
-                theme === 'dark' ? 'translate-x-5' : 'translate-x-1'
-              )}>
-              {theme === 'dark' ? (
-                <Moon className="w-4 h-4 stroke-1" />
-              ) : (
-                <Sun className="w-4 h-4" />
-              )}
-            </div>
-          </button>
-
+          {/* Side Bar Trigger Button */}
           <Button
             variant="ghost"
             size="icon"
-            className="w-8 h-8 ml-4"
+            className="w-8 h-8 mr-2"
             onClick={() => setIsExpanded(isExpanded ? false : true)}>
             {isExpanded ? (
-              <AlignLeft className="w-6 h-6 stroke-primary" />
+              <AlignLeft className="w-5 h-5 stroke-primary" />
             ) : (
-              <AlignRight className="w-6 h-6 stroke-muted-foreground/60" />
+              <AlignRight className="w-5 h-5 stroke-muted-foreground/60" />
             )}
           </Button>
+
+          {/* Settings Menu */}
+          <SettingMenu />
         </div>
       </section>
     </nav>
