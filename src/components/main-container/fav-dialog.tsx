@@ -1,5 +1,5 @@
 import * as z from 'zod'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { FavItem } from './fav-list'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -23,7 +23,9 @@ import { Input } from '@/components/ui/input'
 const formSchema = z.object({
   label: z.string().min(2),
   url: z.string().url(),
-  logoUrl: z.optional(z.string().url()),
+  logoUrl: z.optional(z.string()),
+  shortKey: z.optional(z.string()),
+  searchField: z.optional(z.string()),
 })
 
 export const FavDialog = ({
@@ -41,6 +43,8 @@ export const FavDialog = ({
     label: '',
     url: '',
     logoUrl: '',
+    shortKey: '',
+    searchField: '',
   }
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,19 +73,21 @@ export const FavDialog = ({
         </DialogHeader>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
               control={form.control}
               name="label"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className="text-muted-foreground">
                     Label <span className="text-primary">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Google" {...field} />
+                    <Input
+                      placeholder="Google"
+                      className="bg-muted"
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -92,12 +98,13 @@ export const FavDialog = ({
               name="url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className="text-muted-foreground">
                     URL <span className="text-primary">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="https://google.com"
+                      className="bg-muted"
                       {...field}
                     />
                   </FormControl>
@@ -110,16 +117,51 @@ export const FavDialog = ({
               name="logoUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Icon URL</FormLabel>
+                  <FormLabel className="text-muted-foreground">
+                    Icon URL
+                  </FormLabel>
                   <Input
                     placeholder="https://google.com/favicon.ico"
+                    className="bg-muted"
                     {...field}
                   />
                 </FormItem>
               )}
             />
 
-            <Button type="submit">Submit</Button>
+            <FormField
+              control={form.control}
+              name="shortKey"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-muted-foreground">
+                    Short Key
+                  </FormLabel>
+                  <Input placeholder="google" className="bg-muted" {...field} />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="searchField"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-muted-foreground">
+                    Search Field
+                  </FormLabel>
+                  <Input
+                    placeholder="search?q="
+                    className="bg-muted"
+                    {...field}
+                  />
+                </FormItem>
+              )}
+            />
+            <div className="mb-3" />
+            <Button type="submit" className="w-full">
+              Submit
+            </Button>
           </form>
         </Form>
       </DialogContent>

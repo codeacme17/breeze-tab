@@ -12,7 +12,9 @@ import { FavDialog } from './fav-dialog'
 export type FavItem = {
   label: string
   url: string
-  logoUrl: string
+  logoUrl?: string
+  shortKey?: string
+  searchField?: string
 }
 
 export const FavList = () => {
@@ -20,8 +22,9 @@ export const FavList = () => {
     {
       label: 'Github',
       url: 'https://github.com',
-      logoUrl:
-        'https://github.githubassets.com/favicons/favicon-dark.png',
+      logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',
+      shortKey: 'github',
+      searchField: '',
     },
   ]
 
@@ -98,9 +101,7 @@ export const FavList = () => {
           <Plus className="w-6 h-6 stroke-muted-foreground" />
         </div>
 
-        <p className="text-sm mt-2 text-muted-foreground/70">
-          Add New
-        </p>
+        <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
       </div>
 
       <FavDialog
