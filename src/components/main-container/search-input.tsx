@@ -1,43 +1,48 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
 
-type SearchEngine = 'google' | 'bing' | 'baidu'
+type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const [searchEngine, setSearchEngine] = useState<SearchEngine>('bing')
+  const [searchEngine, setSearchEngine] =
+    useLocalStorage<SearchEngine>('bz:search-engine', 'bing')
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINE[searchEngine] || ''
+    SEARCH_ENGINE[searchEngine!] || ''
   )
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (e.key === 'Tab') switchEngine(e)
     if (e.key === 'Enter') runSearchEngine()
   }
 
+  const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if (searchEngine === 'bing') setSearchEngine('google')
+    else if (searchEngine === 'google') setSearchEngine('baidu')
+    else if (searchEngine === 'baidu') setSearchEngine('bing')
+  }
+
   const runSearchEngine = () => {
-    if (!searchInputRef.current || !searchInputRef.current.value.trim()) return
+    if (
+      !searchInputRef.current ||
+      !searchInputRef.current.value.trim()
+    )
+      return
     const searchInput = searchInputRef.current.value.trim()
     const targetUrl = searchEngineUrl + searchInput
     window.location = targetUrl as unknown as Location
   }
 
-  const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setSearchEngine((prev: SearchEngine) => {
-      if (prev === 'bing') return 'google'
-      else if (prev === 'google') return 'baidu'
-      else if (prev === 'baidu') return 'bing'
-      return prev
-    })
-  }
-
   useEffect(() => {
-    setSearchEngineUrl(SEARCH_ENGINE[searchEngine] || '')
+    setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
   }, [searchEngine])
 
   return (
