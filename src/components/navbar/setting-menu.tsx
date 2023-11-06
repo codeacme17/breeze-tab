@@ -21,9 +21,7 @@ type Color = keyof typeof COLORS
 export const SettingMenu = () => {
   const { theme, setTheme } = useTheme()
   const isExpendFav = useLocalStore((state) => state.isExpendFav)
-  const troggleIsExpendFav = useLocalStore(
-    (state) => state.troggleIsExpendFav
-  )
+  const troggleIsExpendFav = useLocalStore((state) => state.troggleIsExpendFav)
 
   const [color, setColor] = useLocalStorage<Color>('color', 'gray')
   const [colorCollection, setColorCollection] = useState<string[]>([])
@@ -51,7 +49,7 @@ export const SettingMenu = () => {
         <Settings className="w-5 h-5 stroke-muted-foreground/60" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-60">
+      <DropdownMenuContent className="w-60 bg-background">
         <DropdownMenuLabel>Setting</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
@@ -59,9 +57,7 @@ export const SettingMenu = () => {
         {/* Dark Mode */}
         <DropdownMenuItem
           className="flex justify-between cursor-pointer"
-          onClick={() =>
-            setTheme(theme === 'dark' ? 'light' : 'dark')
-          }>
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           <div className="flex items-center">
             <Moon className="w-4 h-4 mr-2" /> Dark Mode
           </div>

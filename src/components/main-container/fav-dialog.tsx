@@ -158,8 +158,10 @@ export const FavDialog = ({
                 </FormItem>
               )}
             />
+
             <div className="mb-3" />
-            <Button type="submit" className="w-full">
+
+            <Button type="submit" className="w-full bg-primary/80">
               Submit
             </Button>
           </form>

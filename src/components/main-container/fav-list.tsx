@@ -70,7 +70,7 @@ export const FavList = () => {
               </p>
             </div>
           </ContextMenuTrigger>
-          <ContextMenuContent>
+          <ContextMenuContent className="bg-background">
             <ContextMenuItem onClick={() => handleModify(item)}>
               <Pencil className="w-4 h-4 mr-2" /> Modify
             </ContextMenuItem>
