@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
-import { useLocalStore } from '@/store'
+import { useExpendFavStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
@@ -11,15 +11,15 @@ type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const [searchEngine, setSearchEngine] =
-    useLocalStorage<SearchEngine>('bz:search-engine', 'bing')
+  const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
+    'bz:search-engine',
+    'bing'
+  )
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
     SEARCH_ENGINE[searchEngine!] || ''
   )
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Tab') switchEngine(e)
     if (e.key === 'Enter') runSearchEngine()
   }
@@ -32,11 +32,7 @@ export const SearchInput = () => {
   }
 
   const runSearchEngine = () => {
-    if (
-      !searchInputRef.current ||
-      !searchInputRef.current.value.trim()
-    )
-      return
+    if (!searchInputRef.current || !searchInputRef.current.value.trim()) return
     const searchInput = searchInputRef.current.value.trim()
     const targetUrl = searchEngineUrl + searchInput
     window.location = targetUrl as unknown as Location
@@ -46,7 +42,7 @@ export const SearchInput = () => {
     setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
   }, [searchEngine])
 
-  const isExpendFav = useLocalStore((state) => state.isExpendFav)
+  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
 
   return (
     <section

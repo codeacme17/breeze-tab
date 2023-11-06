@@ -205,3 +205,13 @@ export const COLORS = {
   `,
   },
 }
+
+export const DEFAUTL_FAV_LIST = [
+  {
+    label: 'Github',
+    url: 'https://github.com',
+    logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',
+    shortKey: 'github',
+    searchField: '',
+  },
+]

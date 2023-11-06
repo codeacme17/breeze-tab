@@ -1,7 +1,7 @@
 import { useTheme } from '@/contexts/theme-provider'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
-import { useLocalStore } from '@/store'
+import { useExpendFavStore } from '@/store'
 import { COLORS } from '@/lib/constants'
 
 import {
@@ -20,8 +20,10 @@ type Color = keyof typeof COLORS
 
 export const SettingMenu = () => {
   const { theme, setTheme } = useTheme()
-  const isExpendFav = useLocalStore((state) => state.isExpendFav)
-  const troggleIsExpendFav = useLocalStore((state) => state.troggleIsExpendFav)
+  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
+  const troggleIsExpendFav = useExpendFavStore(
+    (state) => state.troggleIsExpendFav
+  )
 
   const [color, setColor] = useLocalStorage<Color>('color', 'gray')
   const [colorCollection, setColorCollection] = useState<string[]>([])

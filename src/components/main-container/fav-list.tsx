@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FavItem, useFavListStore } from '@/store'
 
 import {
   ContextMenu,
@@ -9,24 +10,20 @@ import {
 import { Plus, Pencil, Trash2 } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 
-export type FavItem = {
-  label: string
-  url: string
-  logoUrl?: string
-  shortKey?: string
-  searchField?: string
-}
-
 export const FavList = () => {
-  const favList: FavItem[] = [
-    {
-      label: 'Github',
-      url: 'https://github.com',
-      logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',
-      shortKey: 'github',
-      searchField: '',
-    },
-  ]
+  // const favList = [
+  //   {
+  //     label: 'Github',
+  //     url: 'https://github.com',
+  //     logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',
+  //     shortKey: 'github',
+  //     searchField: '',
+  //   },
+  // ]
+
+  console.log(JSON.parse(localStorage.getItem('bz:fav-list')!))
+
+  const favList = useFavListStore((state) => state.favList)
 
   const [showDialog, setShowDialog] = useState(false)
   const [currentItem, setCurrentItem] = useState<FavItem | null>(null)
@@ -43,8 +40,8 @@ export const FavList = () => {
 
   return (
     <section className="w-full flex flex-wrap mt-2">
-      {favList.map((item) => (
-        <ContextMenu key={item.url}>
+      {favList!.map((item) => (
+        <ContextMenu key={item!.url}>
           <ContextMenuTrigger
             className="
               h-32 

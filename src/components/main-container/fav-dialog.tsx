@@ -1,7 +1,7 @@
 import * as z from 'zod'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { FavItem } from './fav-list'
+import { FavItem } from '@/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
