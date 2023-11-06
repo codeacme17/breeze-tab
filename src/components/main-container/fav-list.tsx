@@ -11,19 +11,8 @@ import { Plus, Pencil, Trash2 } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 
 export const FavList = () => {
-  // const favList = [
-  //   {
-  //     label: 'Github',
-  //     url: 'https://github.com',
-  //     logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',
-  //     shortKey: 'github',
-  //     searchField: '',
-  //   },
-  // ]
-
-  console.log(JSON.parse(localStorage.getItem('bz:fav-list')!))
-
   const favList = useFavListStore((state) => state.favList)
+  const removeFav = useFavListStore((state) => state.removeFav)
 
   const [showDialog, setShowDialog] = useState(false)
   const [currentItem, setCurrentItem] = useState<FavItem | null>(null)
@@ -36,6 +25,10 @@ export const FavList = () => {
   const handleAdd = () => {
     setShowDialog(true)
     setCurrentItem(null)
+  }
+
+  const handleRemove = (item: FavItem) => {
+    removeFav(item)
   }
 
   return (
@@ -58,11 +51,11 @@ export const FavList = () => {
               cursor-pointer
             ">
             <div onClick={() => window.location.assign(item.url)}>
-              <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
+              <div className="w-12 mx-auto h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
                 <img src={item.logoUrl} className="w-6 h-6" />
               </div>
 
-              <p className="text-sm mt-2 text-muted-foreground/70">
+              <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
                 {item.label}
               </p>
             </div>
@@ -71,7 +64,7 @@ export const FavList = () => {
             <ContextMenuItem onClick={() => handleModify(item)}>
               <Pencil className="w-4 h-4 mr-2" /> Modify
             </ContextMenuItem>
-            <ContextMenuItem>
+            <ContextMenuItem onClick={() => handleRemove(item)}>
               <Trash2 className="w-4 h-4 mr-2" /> Remove
             </ContextMenuItem>
           </ContextMenuContent>

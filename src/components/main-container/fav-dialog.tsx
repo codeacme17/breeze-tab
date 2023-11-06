@@ -1,8 +1,8 @@
 import * as z from 'zod'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { FavItem } from '@/store'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FavItem, useFavListStore } from '@/store'
 
 import {
   Dialog,
@@ -47,6 +47,9 @@ export const FavDialog = ({
     searchField: '',
   }
 
+  const addFav = useFavListStore((state) => state.addFav)
+  const modifyFav = useFavListStore((state) => state.modifyFav)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: itemInfo || DEFAULT_ITEM,
@@ -62,7 +65,9 @@ export const FavDialog = ({
   }, [itemInfo, open])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    if (type === 'Add') addFav(values)
+    else if (type === 'Modify') modifyFav(values)
+    handleOpenChange(false)
   }
 
   return (
