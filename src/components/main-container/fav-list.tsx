@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   ContextMenu,
   ContextMenuContent,
@@ -5,8 +7,9 @@ import {
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { FavDialog } from './fav-dialog'
 
-type FavItem = {
+export type FavItem = {
   name: string
   url: string
   iconUrl: string
@@ -21,6 +24,19 @@ export const FavList = () => {
         'https://github.githubassets.com/favicons/favicon-dark.png',
     },
   ]
+
+  const [showDialog, setShowDialog] = useState(false)
+  const [currentItem, setCurrentItem] = useState<FavItem | null>(null)
+
+  const handleModify = (item: FavItem) => {
+    setShowDialog(true)
+    setCurrentItem(item)
+  }
+
+  const handleAdd = () => {
+    setShowDialog(true)
+    setCurrentItem(null)
+  }
 
   return (
     <section className="w-full flex flex-wrap mt-2">
@@ -52,7 +68,7 @@ export const FavList = () => {
             </div>
           </ContextMenuTrigger>
           <ContextMenuContent>
-            <ContextMenuItem>
+            <ContextMenuItem onClick={() => handleModify(item)}>
               <Pencil className="w-4 h-4 mr-2" /> Modify
             </ContextMenuItem>
             <ContextMenuItem>
@@ -63,6 +79,7 @@ export const FavList = () => {
       ))}
 
       <div
+        onClick={handleAdd}
         className={`
           h-32 
           w-1/5 
@@ -85,6 +102,13 @@ export const FavList = () => {
           Add New
         </p>
       </div>
+
+      <FavDialog
+        type={currentItem ? 'Modify' : 'Add'}
+        open={showDialog}
+        onOpenChange={setShowDialog}
+        itemInfo={currentItem}
+      />
     </section>
   )
 }
