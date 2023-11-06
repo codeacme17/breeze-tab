@@ -73,7 +73,7 @@ export const Navbar = () => {
             className="w-8 h-8 mr-5"
             onClick={() => setIsExpanded(isExpanded ? false : true)}>
             {isExpanded ? (
-              <AlignLeft className="w-5 h-5 stroke-primary" />
+              <AlignLeft className="w-5 h-5 stroke-muted-foreground/60" />
             ) : (
               <AlignRight className="w-5 h-5 stroke-muted-foreground/60" />
             )}

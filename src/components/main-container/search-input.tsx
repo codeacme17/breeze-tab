@@ -82,7 +82,7 @@ export const SearchInput = () => {
           bg-background/60
           dark:border-background-foreground
           placeholder:text-muted-foreground/50 
-          placeholder:text-sm 
+          placeholder:text-base 
           placeholder:select-none 
           focus:rounded-md`)}
         placeholder="Breezing through the web"

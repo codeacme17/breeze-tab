@@ -6,7 +6,7 @@ export const FavBlock = () => {
 
   return (
     <section className="flex w-full flex-col mt-3">
-      {isExpendFav ? <FavList /> : <FavList />}
+      {isExpendFav ? <FavList /> : null}
     </section>
   )
 }
