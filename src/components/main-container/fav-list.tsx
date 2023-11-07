@@ -32,7 +32,7 @@ export const FavList = () => {
   }
 
   return (
-    <section className="w-full flex flex-wrap mt-2">
+    <section className="w-full flex flex-wrap mt-5">
       {favList!.map((item) => (
         <ContextMenu key={item!.url}>
           <ContextMenuTrigger
@@ -54,9 +54,7 @@ export const FavList = () => {
               <div className="w-12 mx-auto h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
                 <img
                   src={item.logoUrl}
-                  onError={(e: any) =>
-                    (e.target.src = item.canvasLogoUrl)
-                  }
+                  onError={(e: any) => (e.target.src = item.canvasLogoUrl)}
                   className="w-6 h-6"
                 />
               </div>
@@ -97,9 +95,7 @@ export const FavList = () => {
           <Plus className="w-6 h-6 stroke-muted-foreground" />
         </div>
 
-        <p className="text-sm mt-2 text-muted-foreground/70">
-          Add New
-        </p>
+        <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
       </div>
 
       <FavDialog
