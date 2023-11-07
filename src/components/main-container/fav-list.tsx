@@ -31,6 +31,11 @@ export const FavList = () => {
     removeFav(item)
   }
 
+  const handleFetchPicError = (item: FavItem, e: any) => {
+    e.preventDefault()
+    e.target.src = item.canvasLogoUrl
+  }
+
   return (
     <section className="w-full flex flex-wrap mt-2">
       {favList!.map((item) => (
@@ -52,7 +57,11 @@ export const FavList = () => {
             ">
             <div onClick={() => window.location.assign(item.url)}>
               <div className="w-12 mx-auto h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
-                <img src={item.logoUrl} className="w-6 h-6" />
+                <img
+                  src={item.logoUrl}
+                  onError={(e) => handleFetchPicError(item, e)}
+                  className="w-6 h-6"
+                />
               </div>
 
               <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
@@ -91,7 +100,9 @@ export const FavList = () => {
           <Plus className="w-6 h-6 stroke-muted-foreground" />
         </div>
 
-        <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
+        <p className="text-sm mt-2 text-muted-foreground/70">
+          Add New
+        </p>
       </div>
 
       <FavDialog

@@ -66,7 +66,8 @@ export const FavDialog = ({
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (type === 'Add') addFav(values)
-    else if (type === 'Modify') modifyFav(values)
+    else if (type === 'Modify') modifyFav({ ...itemInfo, ...values })
+    console.log({ ...itemInfo, ...values })
     handleOpenChange(false)
   }
 
@@ -78,7 +79,9 @@ export const FavDialog = ({
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-3">
             <FormField
               control={form.control}
               name="label"
@@ -123,7 +126,7 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    Icon URL
+                    Logo URL
                   </FormLabel>
                   <Input
                     placeholder="https://google.com/favicon.ico"
@@ -142,7 +145,11 @@ export const FavDialog = ({
                   <FormLabel className="text-muted-foreground">
                     Short Key
                   </FormLabel>
-                  <Input placeholder="google" className="bg-muted" {...field} />
+                  <Input
+                    placeholder="google"
+                    className="bg-muted"
+                    {...field}
+                  />
                 </FormItem>
               )}
             />

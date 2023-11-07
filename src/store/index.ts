@@ -1,1 +1,1 @@
-export * from './fav-list'
+export * from './fav'
