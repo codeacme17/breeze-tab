@@ -31,11 +31,6 @@ export const FavList = () => {
     removeFav(item)
   }
 
-  const handleFetchPicError = (item: FavItem, e: any) => {
-    e.preventDefault()
-    e.target.src = item.canvasLogoUrl
-  }
-
   return (
     <section className="w-full flex flex-wrap mt-2">
       {favList!.map((item) => (
@@ -59,7 +54,9 @@ export const FavList = () => {
               <div className="w-12 mx-auto h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
                 <img
                   src={item.logoUrl}
-                  onError={(e) => handleFetchPicError(item, e)}
+                  onError={(e: any) =>
+                    (e.target.src = item.canvasLogoUrl)
+                  }
                   className="w-6 h-6"
                 />
               </div>

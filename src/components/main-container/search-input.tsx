@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
-import { useExpendFavStore, useFavListStore } from '@/store'
+import { FavItem, useExpendFavStore, useFavListStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
@@ -10,6 +10,8 @@ import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
 type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
+  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
+
   const searchInputRef = useRef<HTMLInputElement>(null)
   const [searchEngine, setSearchEngine] =
     useLocalStorage<SearchEngine>('bz:search-engine', 'bing')
@@ -19,22 +21,11 @@ export const SearchInput = () => {
 
   const favList = useFavListStore((state) => state.favList)
 
-  const shortKeyCollection = useMemo(
-    () =>
-      favList.map((item) => {
-        return {
-          shortKey: item.shortKey,
-          logoUrl: item.logoUrl || item.canvasLogoUrl,
-        }
-      }),
-    [favList]
-  )
-
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === 'Tab') switchEngine(e)
-    if (e.key === 'Enter') runSearchEngine()
+    if (e.key === 'Enter') handleEnter(e)
   }
 
   const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -42,6 +33,24 @@ export const SearchInput = () => {
     if (searchEngine === 'bing') setSearchEngine('google')
     else if (searchEngine === 'google') setSearchEngine('baidu')
     else if (searchEngine === 'baidu') setSearchEngine('bing')
+  }
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!currentFavItem) return runSearchEngine()
+    window.location.assign(currentFavItem.url)
+  }
+
+  const [currentFavItem, setCurrentFavItem] =
+    useState<FavItem | null>()
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!e.target.value.trim()) return
+
+    const shortKey = e.target.value.trim().toLowerCase()
+    const target = favList.find((item) => item.shortKey === shortKey)
+    if (target) setCurrentFavItem(target)
+    else setCurrentFavItem(null)
   }
 
   const runSearchEngine = () => {
@@ -59,15 +68,6 @@ export const SearchInput = () => {
     setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
   }, [searchEngine])
 
-  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    console.log(e.target.value)
-    console.log(shortKeyCollection)
-  }
-
   return (
     <section
       className={cn(
@@ -77,7 +77,19 @@ export const SearchInput = () => {
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
         htmlFor="search-input">
-        <Search className="stroke-muted-foreground/50" />
+        {currentFavItem ? (
+          <img
+            src={
+              currentFavItem.logoUrl || currentFavItem.canvasLogoUrl
+            }
+            onError={(e: any) =>
+              (e.target.src = currentFavItem.canvasLogoUrl)
+            }
+            className="w-6 h-6"
+          />
+        ) : (
+          <Search className="stroke-muted-foreground/50" />
+        )}
       </label>
 
       {/* Searh Input */}
