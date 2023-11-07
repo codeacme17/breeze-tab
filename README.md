@@ -5,7 +5,7 @@
 </p>
 
 <samp>
-<h3 align="center">Breeze Tab</h3>
+<h1 align="center">Breeze Tab</h1>
 
 <p align="center"> 
 A browser new tab extension, similar to Chrome tab but better
