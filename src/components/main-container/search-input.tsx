@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
-import { useExpendFavStore } from '@/store'
+import { useExpendFavStore, useFavListStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
@@ -11,15 +11,28 @@ type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
-    'bz:search-engine',
-    'bing'
-  )
+  const [searchEngine, setSearchEngine] =
+    useLocalStorage<SearchEngine>('bz:search-engine', 'bing')
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
     SEARCH_ENGINE[searchEngine!] || ''
   )
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const favList = useFavListStore((state) => state.favList)
+
+  const shortKeyCollection = useMemo(
+    () =>
+      favList.map((item) => {
+        return {
+          shortKey: item.shortKey,
+          logoUrl: item.logoUrl || item.canvasLogoUrl,
+        }
+      }),
+    [favList]
+  )
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (e.key === 'Tab') switchEngine(e)
     if (e.key === 'Enter') runSearchEngine()
   }
@@ -32,7 +45,11 @@ export const SearchInput = () => {
   }
 
   const runSearchEngine = () => {
-    if (!searchInputRef.current || !searchInputRef.current.value.trim()) return
+    if (
+      !searchInputRef.current ||
+      !searchInputRef.current.value.trim()
+    )
+      return
     const searchInput = searchInputRef.current.value.trim()
     const targetUrl = searchEngineUrl + searchInput
     window.location = targetUrl as unknown as Location
@@ -43,6 +60,13 @@ export const SearchInput = () => {
   }, [searchEngine])
 
   const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log(e.target.value)
+    console.log(shortKeyCollection)
+  }
 
   return (
     <section
@@ -61,6 +85,7 @@ export const SearchInput = () => {
         id="search-input"
         ref={searchInputRef}
         onKeyDown={handleKeyDown}
+        onChange={handleInputChange}
         type="text"
         className={cn(` 
           w-full 
