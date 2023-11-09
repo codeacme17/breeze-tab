@@ -33,9 +33,7 @@ export const Navbar = () => {
                 size="icon"
                 variant="ghost"
                 onClick={() =>
-                  window.open(
-                    'https://github.com/codeacme17/breeze-tab'
-                  )
+                  window.open('https://github.com/codeacme17/breeze-tab')
                 }>
                 <Github className="w-4 h-4" />
               </Button>
@@ -66,8 +64,8 @@ export const Navbar = () => {
 
         {/* Right Buttons */}
         <div className="ml-auto flex items-center">
-          {/* Side Bar Trigger Button */}
-          <Button
+          {/* TODO: Side Bar Trigger Button */}
+          {/* <Button
             variant="ghost"
             size="icon"
             className="w-8 h-8 mr-5"
@@ -77,7 +75,7 @@ export const Navbar = () => {
             ) : (
               <AlignRight className="w-5 h-5 stroke-muted-foreground/60" />
             )}
-          </Button>
+          </Button> */}
 
           {/* Settings Menu */}
           <SettingMenu />
