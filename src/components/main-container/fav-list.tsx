@@ -6,6 +6,7 @@ import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 import { FavListItem } from './fav-list-item'
+import { cn } from '@/lib/utils'
 
 export const FavList = () => {
   const favList = useFavListStore((state) => state.favList)
@@ -81,19 +82,21 @@ export const FavList = () => {
 
             <div
               onClick={handleAdd}
-              className="
+              className={cn(
+                `
                 h-32 
                 flex 
                 flex-col 
                 select-none 
                 justify-center 
                 items-center 
-                hover:bg-muted 
                 transition-colors 
                 delay-75 
                 rounded-lg 
                 cursor-pointer
-                ">
+                `,
+                isDragging ? '' : 'hover:bg-muted'
+              )}>
               <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
                 <Plus className="w-6 h-6 stroke-muted-foreground" />
               </div>
