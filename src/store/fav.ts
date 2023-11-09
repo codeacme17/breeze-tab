@@ -19,6 +19,11 @@ interface FavListState {
   removeFav: (fav: FavItem) => void
 }
 
+interface ExpendFavState {
+  isExpendFav: boolean
+  troggleIsExpendFav: (is: boolean) => void
+}
+
 export const useFavListStore = create<FavListState>((set) => {
   if (!localStorage.getItem('bz:fav-list'))
     localStorage.setItem('bz:fav-list', JSON.stringify(DEFAUTL_FAV_LIST))
@@ -63,11 +68,6 @@ export const useFavListStore = create<FavListState>((set) => {
     },
   }
 })
-
-interface ExpendFavState {
-  isExpendFav: boolean
-  troggleIsExpendFav: (is: boolean) => void
-}
 
 export const useExpendFavStore = create<ExpendFavState>((set) => ({
   isExpendFav: localStorage.getItem('bz:is-fav-expend') === 'true' || false,
