@@ -10,10 +10,10 @@
     "128": "icon/128.png"
   },
   "background": {
-    "service_worker": "src/background.ts"
+    "service_worker": "src/scripts/background.ts"
   },
   "{{chrome}}.action": {
-    "default_popup": "src/popup.html"
+    "default_popup": "src/popup/index.html"
   },
   "chrome_url_overrides": {
     "newtab": "index.html"
