@@ -9,6 +9,14 @@
     "96": "icon/96.png",
     "128": "icon/128.png"
   },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
   "background": {
     "service_worker": "src/scripts/background.ts"
   },
