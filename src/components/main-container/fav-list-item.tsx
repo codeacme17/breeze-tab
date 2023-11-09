@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { FavItem } from '@/store'
 
 import {
   Draggable,
@@ -11,7 +12,6 @@ import {
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
 import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
-import { FavItem } from '@/store'
 
 interface FavListItemProps {
   item: FavItem
