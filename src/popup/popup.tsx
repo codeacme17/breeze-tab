@@ -2,7 +2,13 @@ import { Button } from '@/components/ui/button'
 import { version } from '../../package.json'
 import { Github } from 'lucide-react'
 
+import { useFavListStore } from '@/store'
+
 const Popup = () => {
+  const favList = useFavListStore((state) => state.favList)
+
+  console.log(favList)
+
   return (
     <>
       <div className="flex w-full">

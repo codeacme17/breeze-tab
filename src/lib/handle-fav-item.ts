@@ -1,4 +1,4 @@
-import { FavItem } from '@/store'
+import { FavItem, useFavListStore } from '@/store'
 
 export const handleFavItem = (favItem: FavItem) => {
   favItem = createCanvaseLogo(favItem)
@@ -20,8 +20,7 @@ const drawReserveLogo = (favItem: FavItem) => {
   canvas.width = 28
   canvas.height = 28
 
-  const bgCtx =
-    canvas.getContext('2d') || new CanvasRenderingContext2D()
+  const bgCtx = canvas.getContext('2d') || new CanvasRenderingContext2D()
   bgCtx.arc(
     canvas.width / 2,
     canvas.height / 2,
@@ -32,8 +31,7 @@ const drawReserveLogo = (favItem: FavItem) => {
   bgCtx.fillStyle = `hsl(${Math.random() * 1000}, 70%, 50%)`
   bgCtx.fill()
 
-  const textCtx =
-    canvas.getContext('2d') || new CanvasRenderingContext2D()
+  const textCtx = canvas.getContext('2d') || new CanvasRenderingContext2D()
   textCtx.shadowColor = 'rgba(0, 0, 0, 0.2)'
   textCtx.shadowOffsetX = 2
   textCtx.shadowOffsetY = 2
@@ -47,4 +45,14 @@ const drawReserveLogo = (favItem: FavItem) => {
     canvas.height / 2 + canvas.height / 16
   )
   return canvas
+}
+
+export const isDulplicateFavItem = (favItem: FavItem) => {
+  const favList = useFavListStore.getState().favList
+  const is = favList.find(
+    (item) =>
+      (item.url === favItem.url || item.label === favItem.label) &&
+      item.id !== favItem.id
+  )
+  return is
 }
