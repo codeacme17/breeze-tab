@@ -37,8 +37,9 @@ export const FavList = () => {
 
   const onDragEnd = useCallback(
     (result: any) => {
-      if (!result.destination) return
       setIsDragging(false)
+
+      if (!result.destination) return
 
       const newFavList = reorder(
         favList,
