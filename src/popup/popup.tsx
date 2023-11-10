@@ -95,6 +95,7 @@ const Popup = () => {
         <Button
           className="w-full mt-3"
           variant="secondary"
+          disabled={!label.trim()}
           type="submit">
           Add current page to fav
         </Button>
