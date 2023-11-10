@@ -22,6 +22,16 @@ export const FavList = () => {
     number | null
   >(null)
 
+  const handleStartDragging = (e: any) => {
+    setCurrentDraggingIndex(e.oldIndex)
+    setIsDragging(true)
+  }
+
+  const handleEndDragging = () => {
+    setCurrentDraggingIndex(null)
+    setIsDragging(false)
+  }
+
   const handleModify = (item: FavItem) => {
     setShowDialog(true)
     setCurrentRightClickItem(item)
@@ -36,18 +46,8 @@ export const FavList = () => {
     removeFav(item)
   }
 
-  const handleStartDragging = (e: any) => {
-    setCurrentDraggingIndex(e.oldIndex)
-    setIsDragging(true)
-  }
-
-  const handleEndDragging = () => {
-    setCurrentDraggingIndex(null)
-    setIsDragging(false)
-  }
-
   return (
-    <section className="h-[370px] w-full overflow-y-scroll mt-5 scroll-smooth">
+    <section className="h-[400px] w-full overflow-y-scroll mt-5 scroll-smooth">
       <ReactSortable
         list={favList}
         setList={setFavList}
@@ -75,21 +75,19 @@ export const FavList = () => {
 
         <div
           onClick={handleAdd}
-          className={cn(
-            `   ghost
-                h-32 
-                flex 
-                flex-col 
-                select-none 
-                justify-center 
-                items-center 
-                transition-colors 
-                delay-75 
-                rounded-lg 
-                cursor-pointer
-                hover:bg-muted/70
-                `
-          )}>
+          className={cn(`
+            ghost
+            h-32 
+            flex 
+            flex-col 
+            select-none 
+            justify-center 
+            items-center 
+            transition-colors 
+            delay-75 
+            rounded-lg 
+            cursor-pointer
+            hover:bg-muted/70`)}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>

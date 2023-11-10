@@ -65,7 +65,15 @@ export const FavListItem = ({
             />
           </div>
 
-          <DragIcon isDragging={isDragging} />
+          <div
+            className={cn(
+              'handle absolute right-2 top-2 transition-opacity opacity-0 ',
+              isDragging
+                ? 'opacity-0 cursor-grabbing'
+                : 'group-hover:opacity-100 cursor-grab'
+            )}>
+            <GripHorizontal className="stroke-muted-foreground" />
+          </div>
 
           <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
             {item.label}
@@ -81,20 +89,6 @@ export const FavListItem = ({
           </ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuTrigger>
-    </div>
-  )
-}
-
-const DragIcon = ({ isDragging }: { isDragging: boolean }) => {
-  return (
-    <div
-      className={cn(
-        'handle absolute right-2 top-2 transition-opacity opacity-0 ',
-        isDragging
-          ? 'opacity-0 cursor-grabbing'
-          : 'group-hover:opacity-100 cursor-grab'
-      )}>
-      <GripHorizontal className="stroke-muted-foreground" />
     </div>
   )
 }
