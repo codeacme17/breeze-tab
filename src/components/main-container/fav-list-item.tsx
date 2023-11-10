@@ -2,11 +2,6 @@ import { cn } from '@/lib/utils'
 import { FavItem } from '@/store'
 
 import {
-  Draggable,
-  DraggableProvided,
-  DraggableStateSnapshot,
-} from 'react-beautiful-dnd'
-import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
@@ -15,33 +10,26 @@ import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
 
 interface FavListItemProps {
   item: FavItem
-  index: number
   onModify: (item: FavItem) => void
   onRemove: (item: FavItem) => void
   isDragging: boolean
-}
-
-interface DragIconProps {
-  isDragging: boolean
-  provided: DraggableProvided
-  snapshot: DraggableStateSnapshot
+  currentDraggingIndex: number | null
+  index: number
 }
 
 export const FavListItem = ({
   item,
-  index,
   onModify,
   onRemove,
   isDragging,
+  currentDraggingIndex,
+  index,
 }: FavListItemProps) => {
   return (
-    <Draggable key={item.url} draggableId={item.url} index={index}>
-      {(provided, snapshot) => (
-        <ContextMenuTrigger
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          className={cn(
-            `
+    <div key={item.id}>
+      <ContextMenuTrigger
+        className={cn(
+          `
             relative
             group
             h-32 
@@ -54,14 +42,13 @@ export const FavListItem = ({
             delay-75 
             shadow:duration-100
             rounded-lg 
-            cursor-pointer
           `,
-            snapshot.isDragging ? 'bg-muted shadow-lg' : '',
-            isDragging ? 'hover:bg-none' : 'hover:bg-muted'
-          )}>
-          <div onClick={() => window.location.assign(item.url)}>
-            <div
-              className="
+          isDragging ? 'cursor-grabbing' : 'hover:bg-muted/70 cursor-pointer',
+          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : ''
+        )}>
+        <div onClick={() => window.location.assign(item.url)}>
+          <div
+            className="
               w-12 
               h-12 
               mx-auto 
@@ -69,49 +56,39 @@ export const FavListItem = ({
               flex 
               justify-center 
               items-center 
-              bg-muted-foreground/20">
-              <img
-                src={item.logoUrl}
-                onError={(e: any) => (e.target.src = item.canvasLogoUrl)}
-                className="w-6 h-6"
-              />
-            </div>
-
-            <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
-              {item.label}
-            </p>
+              bg-muted-foreground/20
+            ">
+            <img
+              src={item.logoUrl}
+              onError={(e: any) => (e.target.src = item.canvasLogoUrl)}
+              className="w-6 h-6"
+            />
           </div>
 
-          <DragIcon
-            provided={provided}
-            isDragging={isDragging}
-            snapshot={snapshot}
-          />
+          <div
+            className={cn(
+              'handle absolute right-2 top-2 transition-opacity opacity-0 ',
+              isDragging
+                ? 'opacity-0 cursor-grabbing'
+                : 'group-hover:opacity-100 cursor-grab'
+            )}>
+            <GripHorizontal className="stroke-muted-foreground" />
+          </div>
 
-          <ContextMenuContent className="bg-background">
-            <ContextMenuItem onClick={() => onModify(item)}>
-              <Pencil className="w-4 h-4 mr-2" /> Modify
-            </ContextMenuItem>
-            <ContextMenuItem onClick={() => onRemove(item)}>
-              <Trash2 className="w-4 h-4 mr-2" /> Remove
-            </ContextMenuItem>
-          </ContextMenuContent>
-        </ContextMenuTrigger>
-      )}
-    </Draggable>
-  )
-}
+          <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
+            {item.label}
+          </p>
+        </div>
 
-const DragIcon = ({ isDragging, provided, snapshot }: DragIconProps) => {
-  return (
-    <div
-      {...provided.dragHandleProps}
-      className={cn(
-        'absolute right-2 top-2 transition-opacity opacity-0',
-        snapshot.isDragging && 'opacity-100',
-        !isDragging && 'group-hover:opacity-100'
-      )}>
-      <GripHorizontal className="stroke-muted-foreground" />
+        <ContextMenuContent className="bg-background">
+          <ContextMenuItem onClick={() => onModify(item)}>
+            <Pencil className="w-4 h-4 mr-2" /> Modify
+          </ContextMenuItem>
+          <ContextMenuItem onClick={() => onRemove(item)}>
+            <Trash2 className="w-4 h-4 mr-2" /> Remove
+          </ContextMenuItem>
+        </ContextMenuContent>
+      </ContextMenuTrigger>
     </div>
   )
 }

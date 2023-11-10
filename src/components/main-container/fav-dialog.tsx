@@ -76,6 +76,25 @@ export const FavDialog = ({
     handleOpenChange(false)
   }
 
+  // const addFakeFav = () => {
+  //   for (let i = 0; i < 30; i++) {
+  //     const data: FavItem = {
+  //       id: nanoid(),
+  //       label: 'Google',
+  //       url: 'https://google.com' + i,
+  //       logoUrl: 'https://google.com/favicon.ico',
+  //       shortKey: 'google',
+  //       searchField: 'search?q=',
+  //     }
+
+  //     addFav(data)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   addFakeFav()
+  // }, [])
+
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
@@ -84,9 +103,7 @@ export const FavDialog = ({
         </DialogHeader>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
               control={form.control}
               name="label"
@@ -150,11 +167,7 @@ export const FavDialog = ({
                   <FormLabel className="text-muted-foreground">
                     Short Key
                   </FormLabel>
-                  <Input
-                    placeholder="google"
-                    className="bg-muted"
-                    {...field}
-                  />
+                  <Input placeholder="google" className="bg-muted" {...field} />
                 </FormItem>
               )}
             />

@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { FavItem, useFavListStore } from '@/store'
 import { cn } from '@/lib/utils'
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { ReactSortable } from 'react-sortablejs'
 import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
@@ -13,107 +13,95 @@ export const FavList = () => {
   const setFavList = useFavListStore((state) => state.setFavList)
   const removeFav = useFavListStore((state) => state.removeFav)
 
-  const [showDialog, setShowDialog] = useState(false)
-  const [currentItem, setCurrentItem] = useState<FavItem | null>(null)
   const [isDragging, setIsDragging] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
+  const [currentRightClickItem, setCurrentRightClickItem] =
+    useState<FavItem | null>(null)
+
+  const [currentDraggingIndex, setCurrentDraggingIndex] = useState<
+    number | null
+  >(null)
+
+  const handleStartDragging = (e: any) => {
+    setCurrentDraggingIndex(e.oldIndex)
+    setIsDragging(true)
+  }
+
+  const handleEndDragging = () => {
+    setCurrentDraggingIndex(null)
+    setIsDragging(false)
+  }
 
   const handleModify = (item: FavItem) => {
     setShowDialog(true)
-    setCurrentItem(item)
+    setCurrentRightClickItem(item)
   }
 
   const handleAdd = () => {
     setShowDialog(true)
-    setCurrentItem(null)
+    setCurrentRightClickItem(null)
   }
 
   const handleRemove = (item: FavItem) => {
     removeFav(item)
   }
 
-  const onDragStart = () => {
-    setIsDragging(true)
-  }
-
-  const onDragEnd = useCallback(
-    (result: any) => {
-      setIsDragging(false)
-
-      if (!result.destination) return
-
-      const newFavList = reorder(
-        favList,
-        result.source.index,
-        result.destination.index
-      )
-
-      setFavList(newFavList)
-    },
-    [favList, setFavList]
-  )
-
-  const reorder = (list: FavItem[], startIndex: number, endIndex: number) => {
-    const result = list
-    const [removed] = result.splice(startIndex, 1)
-    result.splice(endIndex, 0, removed)
-    return result
-  }
-
   return (
-    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppableFavList" direction="horizontal">
-        {(provided) => (
-          <section
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="w-full grid grid-cols-5 mt-5">
-            {favList.map((item, index) => (
-              <ContextMenu key={item!.url}>
-                <FavListItem
-                  item={item}
-                  index={index}
-                  onModify={handleModify}
-                  onRemove={handleRemove}
-                  isDragging={isDragging}
-                />
-              </ContextMenu>
-            ))}
+    <section className="h-[400px] w-full overflow-y-scroll mt-5 scroll-smooth">
+      <ReactSortable
+        list={favList}
+        setList={setFavList}
+        handle=".handle"
+        ghostClass="ghost"
+        animation={300}
+        scrollSensitivity={100}
+        forceFallback={true}
+        scrollSpeed={20}
+        onStart={handleStartDragging}
+        onEnd={handleEndDragging}
+        className="grid grid-cols-5">
+        {favList.map((item, index) => (
+          <ContextMenu key={item!.url}>
+            <FavListItem
+              item={item}
+              isDragging={isDragging}
+              onModify={handleModify}
+              onRemove={handleRemove}
+              currentDraggingIndex={currentDraggingIndex}
+              index={index}
+            />
+          </ContextMenu>
+        ))}
 
-            {provided.placeholder}
+        <div
+          onClick={handleAdd}
+          className={cn(`
+            ghost
+            h-32 
+            flex 
+            flex-col 
+            select-none 
+            justify-center 
+            items-center 
+            transition-colors 
+            delay-75 
+            rounded-lg 
+            cursor-pointer
+            hover:bg-muted/70`)}>
+          <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
+            <Plus className="w-6 h-6 stroke-muted-foreground" />
+          </div>
 
-            <div
-              onClick={handleAdd}
-              className={cn(
-                `
-                h-32 
-                flex 
-                flex-col 
-                select-none 
-                justify-center 
-                items-center 
-                transition-colors 
-                delay-75 
-                rounded-lg 
-                cursor-pointer
-                `,
-                isDragging ? '' : 'hover:bg-muted'
-              )}>
-              <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
-                <Plus className="w-6 h-6 stroke-muted-foreground" />
-              </div>
-
-              <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
-            </div>
-          </section>
-        )}
-      </Droppable>
+          <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
+        </div>
+      </ReactSortable>
 
       <FavDialog
-        type={currentItem ? 'Modify' : 'Add'}
+        type={currentRightClickItem ? 'Modify' : 'Add'}
         open={showDialog}
         onOpenChange={setShowDialog}
-        itemInfo={currentItem}
+        itemInfo={currentRightClickItem}
       />
-    </DragDropContext>
+    </section>
   )
 }
