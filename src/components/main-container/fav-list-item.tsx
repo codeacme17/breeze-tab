@@ -2,11 +2,6 @@ import { cn } from '@/lib/utils'
 import { FavItem } from '@/store'
 
 import {
-  Draggable,
-  DraggableProvided,
-  DraggableStateSnapshot,
-} from 'react-beautiful-dnd'
-import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
@@ -15,24 +10,18 @@ import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
 
 interface FavListItemProps {
   item: FavItem
-  index: number
   onModify: (item: FavItem) => void
   onRemove: (item: FavItem) => void
-  isDragging: boolean
 }
 
 interface DragIconProps {
   isDragging: boolean
-  provided: DraggableProvided
-  snapshot: DraggableStateSnapshot
 }
 
 export const FavListItem = ({
   item,
-  index,
   onModify,
   onRemove,
-  isDragging,
 }: FavListItemProps) => {
   return (
     <div key={item.id}>
@@ -52,8 +41,7 @@ export const FavListItem = ({
             shadow:duration-100
             rounded-lg 
             cursor-pointer
-          `,
-          isDragging ? 'hover:bg-none' : 'hover:bg-muted'
+          `
         )}>
         <div onClick={() => window.location.assign(item.url)}>
           <div
@@ -75,6 +63,8 @@ export const FavListItem = ({
             />
           </div>
 
+          <DragIcon />
+
           <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
             {item.label}
           </p>
@@ -93,11 +83,11 @@ export const FavListItem = ({
   )
 }
 
-const DragIcon = ({ isDragging }: DragIconProps) => {
+const DragIcon = () => {
   return (
     <div
       className={cn(
-        'absolute right-2 top-2 transition-opacity opacity-0'
+        'handle absolute right-2 top-2 transition-opacity opacity-0 group-hover:opacity-100 cursor-move'
       )}>
       <GripHorizontal className="stroke-muted-foreground" />
     </div>
