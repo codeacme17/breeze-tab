@@ -1,5 +1,6 @@
 import browser from 'webextension-polyfill'
 import { useEffect, useState } from 'react'
+import { nanoid } from 'nanoid'
 import { FavItem, useFavListStore } from '@/store'
 import {
   handleFavItem,
@@ -9,7 +10,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { nanoid } from 'nanoid'
 import { toast } from '@/components/ui/use-toast'
 
 const Popup = () => {
@@ -54,12 +54,7 @@ const Popup = () => {
       canvasLogoUrl: '',
     }
 
-    if (isDulplicateFavItem(data!))
-      return toast({
-        title: 'Duplicate Item',
-        description: 'This item already exists.',
-        variant: 'destructive',
-      })
+    if (isDulplicateFavItem(data!)) return
 
     addFav(handleFavItem(data))
 

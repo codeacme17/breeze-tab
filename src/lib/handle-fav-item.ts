@@ -1,3 +1,4 @@
+import { toast } from '@/components/ui/use-toast'
 import { FavItem, useFavListStore } from '@/store'
 
 export const handleFavItem = (favItem: FavItem) => {
@@ -20,7 +21,8 @@ const drawReserveLogo = (favItem: FavItem) => {
   canvas.width = 28
   canvas.height = 28
 
-  const bgCtx = canvas.getContext('2d') || new CanvasRenderingContext2D()
+  const bgCtx =
+    canvas.getContext('2d') || new CanvasRenderingContext2D()
   bgCtx.arc(
     canvas.width / 2,
     canvas.height / 2,
@@ -31,7 +33,8 @@ const drawReserveLogo = (favItem: FavItem) => {
   bgCtx.fillStyle = `hsl(${Math.random() * 1000}, 70%, 50%)`
   bgCtx.fill()
 
-  const textCtx = canvas.getContext('2d') || new CanvasRenderingContext2D()
+  const textCtx =
+    canvas.getContext('2d') || new CanvasRenderingContext2D()
   textCtx.shadowColor = 'rgba(0, 0, 0, 0.2)'
   textCtx.shadowOffsetX = 2
   textCtx.shadowOffsetY = 2
@@ -54,5 +57,13 @@ export const isDulplicateFavItem = (favItem: FavItem) => {
       (item.url === favItem.url || item.label === favItem.label) &&
       item.id !== favItem.id
   )
+
+  if (is)
+    toast({
+      title: 'Duplicate Item',
+      description: 'This item already exists.',
+      variant: 'destructive',
+    })
+
   return is
 }
