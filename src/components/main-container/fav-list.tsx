@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { FavItem, useFavListStore } from '@/store'
 import { cn } from '@/lib/utils'
 
@@ -13,25 +13,41 @@ export const FavList = () => {
   const setFavList = useFavListStore((state) => state.setFavList)
   const removeFav = useFavListStore((state) => state.removeFav)
 
+  const [isDragging, setIsDragging] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
-  const [currentItem, setCurrentItem] = useState<FavItem | null>(null)
+  const [currentRightClickItem, setCurrentRightClickItem] =
+    useState<FavItem | null>(null)
+
+  const [currentDraggingIndex, setCurrentDraggingIndex] = useState<
+    number | null
+  >(null)
 
   const handleModify = (item: FavItem) => {
     setShowDialog(true)
-    setCurrentItem(item)
+    setCurrentRightClickItem(item)
   }
 
   const handleAdd = () => {
     setShowDialog(true)
-    setCurrentItem(null)
+    setCurrentRightClickItem(null)
   }
 
   const handleRemove = (item: FavItem) => {
     removeFav(item)
   }
 
+  const handleStartDragging = (e: any) => {
+    setCurrentDraggingIndex(e.oldIndex)
+    setIsDragging(true)
+  }
+
+  const handleEndDragging = () => {
+    setCurrentDraggingIndex(null)
+    setIsDragging(false)
+  }
+
   return (
-    <section className="h-[370px] w-full overflow-y-scroll mt-5">
+    <section className="h-[370px] w-full overflow-y-scroll mt-5 scroll-smooth">
       <ReactSortable
         list={favList}
         setList={setFavList}
@@ -40,14 +56,19 @@ export const FavList = () => {
         animation={300}
         scrollSensitivity={100}
         forceFallback={true}
-        scrollSpeed={10}
+        scrollSpeed={20}
+        onStart={handleStartDragging}
+        onEnd={handleEndDragging}
         className="grid grid-cols-5">
-        {favList.map((item) => (
+        {favList.map((item, index) => (
           <ContextMenu key={item!.url}>
             <FavListItem
               item={item}
+              isDragging={isDragging}
               onModify={handleModify}
               onRemove={handleRemove}
+              currentDraggingIndex={currentDraggingIndex}
+              index={index}
             />
           </ContextMenu>
         ))}
@@ -78,10 +99,10 @@ export const FavList = () => {
       </ReactSortable>
 
       <FavDialog
-        type={currentItem ? 'Modify' : 'Add'}
+        type={currentRightClickItem ? 'Modify' : 'Add'}
         open={showDialog}
         onOpenChange={setShowDialog}
-        itemInfo={currentItem}
+        itemInfo={currentRightClickItem}
       />
     </section>
   )

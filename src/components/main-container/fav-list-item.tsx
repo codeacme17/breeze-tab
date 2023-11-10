@@ -12,9 +12,19 @@ interface FavListItemProps {
   item: FavItem
   onModify: (item: FavItem) => void
   onRemove: (item: FavItem) => void
+  isDragging: boolean
+  currentDraggingIndex: number | null
+  index: number
 }
 
-export const FavListItem = ({ item, onModify, onRemove }: FavListItemProps) => {
+export const FavListItem = ({
+  item,
+  onModify,
+  onRemove,
+  isDragging,
+  currentDraggingIndex,
+  index,
+}: FavListItemProps) => {
   return (
     <div key={item.id}>
       <ContextMenuTrigger
@@ -32,9 +42,9 @@ export const FavListItem = ({ item, onModify, onRemove }: FavListItemProps) => {
             delay-75 
             shadow:duration-100
             rounded-lg 
-            cursor-pointer
-            hover:bg-muted/70
-          `
+          `,
+          isDragging ? 'cursor-grabbing' : 'hover:bg-muted/70 cursor-pointer',
+          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : ''
         )}>
         <div onClick={() => window.location.assign(item.url)}>
           <div
@@ -55,7 +65,7 @@ export const FavListItem = ({ item, onModify, onRemove }: FavListItemProps) => {
             />
           </div>
 
-          <DragIcon />
+          <DragIcon isDragging={isDragging} />
 
           <p className="text-sm truncate w-24 text-center break-words mt-2 text-muted-foreground/70">
             {item.label}
@@ -75,11 +85,14 @@ export const FavListItem = ({ item, onModify, onRemove }: FavListItemProps) => {
   )
 }
 
-const DragIcon = () => {
+const DragIcon = ({ isDragging }: { isDragging: boolean }) => {
   return (
     <div
       className={cn(
-        'handle absolute right-2 top-2 transition-opacity opacity-0 group-hover:opacity-100 cursor-move'
+        'handle absolute right-2 top-2 transition-opacity opacity-0 ',
+        isDragging
+          ? 'opacity-0 cursor-grabbing'
+          : 'group-hover:opacity-100 cursor-grab'
       )}>
       <GripHorizontal className="stroke-muted-foreground" />
     </div>
