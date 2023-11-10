@@ -3,6 +3,7 @@ import { FavItem, useFavListStore } from '@/store'
 import { cn } from '@/lib/utils'
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { ReactSortable } from 'react-sortablejs'
 import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
@@ -52,7 +53,11 @@ export const FavList = () => {
     [favList, setFavList]
   )
 
-  const reorder = (list: FavItem[], startIndex: number, endIndex: number) => {
+  const reorder = (
+    list: FavItem[],
+    startIndex: number,
+    endIndex: number
+  ) => {
     const result = list
     const [removed] = result.splice(startIndex, 1)
     result.splice(endIndex, 0, removed)
@@ -60,31 +65,28 @@ export const FavList = () => {
   }
 
   return (
-    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppableFavList" direction="horizontal">
-        {(provided) => (
-          <section
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="w-full grid grid-cols-5 mt-5">
-            {favList.map((item, index) => (
-              <ContextMenu key={item!.url}>
-                <FavListItem
-                  item={item}
-                  index={index}
-                  onModify={handleModify}
-                  onRemove={handleRemove}
-                  isDragging={isDragging}
-                />
-              </ContextMenu>
-            ))}
+    <>
+      <section>
+        <ReactSortable
+          list={favList}
+          setList={setFavList}
+          className="w-full grid grid-cols-5 mt-5">
+          {favList.map((item, index) => (
+            <ContextMenu key={item!.url}>
+              <FavListItem
+                item={item}
+                index={index}
+                onModify={handleModify}
+                onRemove={handleRemove}
+                isDragging={isDragging}
+              />
+            </ContextMenu>
+          ))}
 
-            {provided.placeholder}
-
-            <div
-              onClick={handleAdd}
-              className={cn(
-                `
+          <div
+            onClick={handleAdd}
+            className={cn(
+              `
                 h-32 
                 flex 
                 flex-col 
@@ -96,17 +98,18 @@ export const FavList = () => {
                 rounded-lg 
                 cursor-pointer
                 `,
-                isDragging ? '' : 'hover:bg-muted'
-              )}>
-              <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
-                <Plus className="w-6 h-6 stroke-muted-foreground" />
-              </div>
-
-              <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
+              isDragging ? '' : 'hover:bg-muted'
+            )}>
+            <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
+              <Plus className="w-6 h-6 stroke-muted-foreground" />
             </div>
-          </section>
-        )}
-      </Droppable>
+
+            <p className="text-sm mt-2 text-muted-foreground/70">
+              Add New
+            </p>
+          </div>
+        </ReactSortable>
+      </section>
 
       <FavDialog
         type={currentItem ? 'Modify' : 'Add'}
@@ -114,6 +117,6 @@ export const FavList = () => {
         onOpenChange={setShowDialog}
         itemInfo={currentItem}
       />
-    </DragDropContext>
+    </>
   )
 }

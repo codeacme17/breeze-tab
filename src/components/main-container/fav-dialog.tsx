@@ -76,6 +76,25 @@ export const FavDialog = ({
     handleOpenChange(false)
   }
 
+  // const addFakeFav = () => {
+  //   for (let i = 0; i < 30; i++) {
+  //     const data: FavItem = {
+  //       id: nanoid(),
+  //       label: 'Google',
+  //       url: 'https://google.com' + i,
+  //       logoUrl: 'https://google.com/favicon.ico',
+  //       shortKey: 'google',
+  //       searchField: 'search?q=',
+  //     }
+
+  //     addFav(data)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   addFakeFav()
+  // }, [])
+
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
