@@ -14,15 +14,7 @@ interface FavListItemProps {
   onRemove: (item: FavItem) => void
 }
 
-interface DragIconProps {
-  isDragging: boolean
-}
-
-export const FavListItem = ({
-  item,
-  onModify,
-  onRemove,
-}: FavListItemProps) => {
+export const FavListItem = ({ item, onModify, onRemove }: FavListItemProps) => {
   return (
     <div key={item.id}>
       <ContextMenuTrigger
@@ -41,6 +33,7 @@ export const FavListItem = ({
             shadow:duration-100
             rounded-lg 
             cursor-pointer
+            hover:bg-muted/70
           `
         )}>
         <div onClick={() => window.location.assign(item.url)}>
@@ -53,12 +46,11 @@ export const FavListItem = ({
               flex 
               justify-center 
               items-center 
-              bg-muted-foreground/20">
+              bg-muted-foreground/20
+            ">
             <img
               src={item.logoUrl}
-              onError={(e: any) =>
-                (e.target.src = item.canvasLogoUrl)
-              }
+              onError={(e: any) => (e.target.src = item.canvasLogoUrl)}
               className="w-6 h-6"
             />
           </div>

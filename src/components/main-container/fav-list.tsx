@@ -66,15 +66,14 @@ export const FavList = () => {
                 delay-75 
                 rounded-lg 
                 cursor-pointer
+                hover:bg-muted/70
                 `
           )}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>
 
-          <p className="text-sm mt-2 text-muted-foreground/70">
-            Add New
-          </p>
+          <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
         </div>
       </ReactSortable>
 
