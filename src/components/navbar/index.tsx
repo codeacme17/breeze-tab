@@ -33,13 +33,15 @@ export const Navbar = () => {
                 size="icon"
                 variant="ghost"
                 onClick={() =>
-                  window.open('https://github.com/codeacme17/breeze-tab')
+                  window.open(
+                    'https://github.com/codeacme17/breeze-tab'
+                  )
                 }>
                 <Github className="w-4 h-4" />
               </Button>
             </DialogHeader>
 
-            <div className="flex flex-col items-center justify-center text-foreground -mt-5">
+            <div className="flex flex-col items-center justify-center text-foreground -mt-5 select-none">
               <div className="mb-4 w-24 h-24 relative">
                 <img
                   src="/logo.png"
@@ -53,7 +55,10 @@ export const Navbar = () => {
                 />
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
-              <p className="text-sm mt-1">
+              <h4 className="mb-5 text-muted-foreground">
+                Your everyday tab, now breezier
+              </h4>
+              <p className="text-sm">
                 <code className="ml-1 px-2 py-0.5 bg-secondary-foreground/30 rounded-lg">
                   v{version}
                 </code>
