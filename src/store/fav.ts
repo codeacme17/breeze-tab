@@ -3,6 +3,7 @@ import { DEFAUTL_FAV_LIST } from '@/lib/constants'
 import { handleFavItem } from '@/lib/handle-fav-item'
 
 export type FavItem = {
+  id: string
   label: string
   url: string
   logoUrl?: string

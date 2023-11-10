@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FavItem, useFavListStore } from '@/store'
+import { isDulplicateFavItem } from '@/lib/handle-fav-item'
+import { nanoid } from 'nanoid'
 
 import {
   Dialog,
@@ -21,6 +23,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
+  id: z.string(),
   label: z.string().min(2),
   url: z.string().url(),
   logoUrl: z.optional(z.string()),
@@ -40,6 +43,7 @@ export const FavDialog = ({
   itemInfo?: FavItem | null
 }) => {
   const DEFAULT_ITEM: FavItem = {
+    id: nanoid(),
     label: '',
     url: '',
     logoUrl: '',
@@ -65,9 +69,10 @@ export const FavDialog = ({
   }, [itemInfo, open])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (isDulplicateFavItem(values)) return
+
     if (type === 'Add') addFav(values)
     else if (type === 'Modify') modifyFav({ ...itemInfo, ...values })
-    console.log({ ...itemInfo, ...values })
     handleOpenChange(false)
   }
 

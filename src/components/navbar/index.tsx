@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { version } from '../../../package.json'
 
 import {
@@ -9,11 +9,11 @@ import {
 } from '@/components/ui/dialog'
 
 import { Button } from '@/components/ui/button'
-import { AlignLeft, AlignRight, Github } from 'lucide-react'
+import { Github } from 'lucide-react'
 import { SettingMenu } from './setting-menu'
 
 export const Navbar = () => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  // const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <nav className="fixed top-0 py-4 px-7 w-full">

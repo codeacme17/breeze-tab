@@ -208,6 +208,7 @@ export const COLORS = {
 
 export const DEFAUTL_FAV_LIST = [
   {
+    id: '1',
     label: 'Github',
     url: 'https://github.com',
     logoUrl: 'https://github.githubassets.com/favicons/favicon-dark.png',

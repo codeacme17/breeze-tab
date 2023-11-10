@@ -1,4 +1,5 @@
-import { FavItem } from '@/store'
+import { toast } from '@/components/ui/use-toast'
+import { FavItem, useFavListStore } from '@/store'
 
 export const handleFavItem = (favItem: FavItem) => {
   favItem = createCanvaseLogo(favItem)
@@ -47,4 +48,22 @@ const drawReserveLogo = (favItem: FavItem) => {
     canvas.height / 2 + canvas.height / 16
   )
   return canvas
+}
+
+export const isDulplicateFavItem = (favItem: FavItem) => {
+  const favList = useFavListStore.getState().favList
+  const is = favList.find(
+    (item) =>
+      (item.url === favItem.url || item.label === favItem.label) &&
+      item.id !== favItem.id
+  )
+
+  if (is)
+    toast({
+      title: 'Duplicate Item',
+      description: 'This item already exists.',
+      variant: 'destructive',
+    })
+
+  return is
 }

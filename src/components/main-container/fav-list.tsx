@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react'
 import { FavItem, useFavListStore } from '@/store'
+import { cn } from '@/lib/utils'
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 import { FavListItem } from './fav-list-item'
-import { cn } from '@/lib/utils'
 
 export const FavList = () => {
   const favList = useFavListStore((state) => state.favList)
