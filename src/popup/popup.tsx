@@ -10,87 +10,105 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { toast } from '@/components/ui/use-toast'
+import { Construction } from 'lucide-react'
 
 const Popup = () => {
   const addFav = useFavListStore((state) => state.addFav)
+
   const [currentPageInfo, setCurrentPageInfo] =
-    useState<browser.Tabs.Tab | null>(null)
+    useState<browser.Tabs.Tab>()
   const [isValidUrl, setIsValidUrl] = useState(false)
-
-  const getCurrentPageInfo = () => {
-    browser.tabs
-      .query({ active: true, currentWindow: true })
-      .then((tabs) => {
-        setIsValidUrl(
-          tabs[0].url?.startsWith('http') ||
-            tabs[0].url?.startsWith('https') ||
-            false
-        )
-
-        setCurrentPageInfo(tabs[0])
-      })
-  }
+  const [label, setLabel] = useState('')
+  const [shortKey, setShortKey] = useState('')
 
   useEffect(() => {
+    const getCurrentPageInfo = async () => {
+      const tabs = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      })
+
+      setIsValidUrl(
+        tabs[0]?.url?.startsWith('http') ||
+          tabs[0]?.url?.startsWith('https') ||
+          false
+      )
+      setCurrentPageInfo(tabs[0])
+      setLabel(tabs[0]?.title || '')
+    }
+
     getCurrentPageInfo()
   }, [])
 
-  if (!isValidUrl)
-    return (
-      <section className="w-60 text-center">
-        Current page is not a valid page
-      </section>
-    )
+  if (!isValidUrl) return <ErroHint />
 
-  const handleAdd = () => {
+  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     if (!currentPageInfo || !currentPageInfo.url) return
 
     const data: FavItem = {
       id: nanoid(),
-      label: currentPageInfo.title as string,
-      url: currentPageInfo?.url,
-      logoUrl: currentPageInfo?.favIconUrl as string,
+      label: label,
+      url: currentPageInfo.url,
+      logoUrl: currentPageInfo.favIconUrl as string,
+      shortKey: shortKey,
       canvasLogoUrl: '',
     }
 
-    if (isDulplicateFavItem(data!)) return
+    if (isDulplicateFavItem(data)) return
 
     addFav(handleFavItem(data))
 
-    toast({
-      title: 'Success',
-      description: 'Successfully added to fav list.',
-    })
-
-    setTimeout(() => {
-      window.close()
-    }, 2000)
+    setLabel('')
+    setShortKey('')
+    window.close()
   }
 
   return (
     <section className="flex flex-col justify-center text-foreground w-96 px-2 py-4">
-      <div className="flex items-center mb-3">
-        <img src="/logo.png" alt="" className="w-5 h-5" />
-        <div className="ml-2 text-sm">Breeze Tab</div>
+      <div className="flex items-center mb-4 ml-auto">
+        <img src="/logo.png" className="w-6 h-6" />
       </div>
 
-      <Label className="text-muted-foreground mb-1">Label</Label>
-      <Input
-        className="h-8 mb-4"
-        placeholder="Google"
-        value={currentPageInfo?.title as string}
-      />
+      <form onSubmit={handleAdd} className="-mt-6">
+        <Label>Label</Label>
+        <Input
+          className="h-8 mb-4 mt-1"
+          placeholder="Google"
+          value={label}
+          onChange={({ target }) => {
+            setLabel(target.value)
+          }}
+        />
 
-      <Label className="text-muted-foreground mb-1">Short Key</Label>
-      <Input className="h-8" placeholder="g" />
+        <Label>Short Key</Label>
+        <Input
+          className="h-8 mt-1"
+          placeholder="g"
+          value={shortKey}
+          onChange={({ target }) => {
+            setShortKey(target.value)
+          }}
+        />
 
-      <Button
-        className="w-full mt-3"
-        variant="outline"
-        onClick={handleAdd}>
-        Add current page to fav
-      </Button>
+        <Button
+          className="w-full mt-3"
+          variant="secondary"
+          type="submit">
+          Add current page to fav
+        </Button>
+      </form>
+    </section>
+  )
+}
+
+const ErroHint = () => {
+  return (
+    <section className="w-60 text-center h-28 flex flex-col justify-center items-center select-none">
+      <Construction className="mb-1" />
+      <p>Oops...</p>
+      <p>Current page is not a valid page</p>
     </section>
   )
 }
