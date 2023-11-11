@@ -71,7 +71,7 @@ export const SettingMenu = () => {
           className="flex justify-between cursor-pointer"
           onClick={() => troggleIsExpendFav(!isExpendFav)}>
           <div className="flex items-center">
-            <Layers2 className="w-4 h-4 mr-2" /> Show Shortcut
+            <Layers2 className="w-4 h-4 mr-2" /> Show Fav List
           </div>
           <Switch checked={isExpendFav} />
         </DropdownMenuItem>
