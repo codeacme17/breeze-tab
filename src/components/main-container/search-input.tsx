@@ -10,7 +10,10 @@ import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
 type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
+  const favList = useFavListStore((state) => state.favList)
   const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
+
+  const [inputValue, setInputValue] = useState('')
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
@@ -21,13 +24,9 @@ export const SearchInput = () => {
     SEARCH_ENGINE[searchEngine!] || ''
   )
 
-  const favList = useFavListStore((state) => state.favList)
-
   // Current Fav Item is user enter the shortkey whitch is match the fav item
   const [currentFavItem, setCurrentFavItem] = useState<FavItem | null>()
   const [isSeachFieldFocus, setIsSeachFieldFocus] = useState(false)
-
-  const [inputValue, setInputValue] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
