@@ -75,7 +75,8 @@ export const FavList = () => {
 
         <div
           onClick={handleAdd}
-          className={cn(`
+          className={cn(
+            `
             ghost
             h-32 
             flex 
@@ -87,7 +88,9 @@ export const FavList = () => {
             delay-75 
             rounded-lg 
             cursor-pointer
-            hover:bg-muted/70`)}>
+            `,
+            isDragging ? '' : 'hover:bg-muted/70'
+          )}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>
