@@ -176,21 +176,21 @@ export const SearchInput = () => {
           transition-[fill,opacity]`}>
         <BingIcon
           onClick={() => setSearchEngine('bing')}
-          classname={cn(
+          className={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
             searchEngine === 'bing' ? 'fill-primary' : ''
           )}
         />
         <GoogleIcon
           onClick={() => setSearchEngine('google')}
-          classname={cn(
+          className={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
             searchEngine === 'google' ? 'fill-primary' : ''
           )}
         />
         <BaiduIcon
           onClick={() => setSearchEngine('baidu')}
-          classname={cn(
+          className={cn(
             'fill-muted-foreground/50 cursor-pointer',
             searchEngine === 'baidu' ? 'fill-primary' : ''
           )}
