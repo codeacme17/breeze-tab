@@ -1,3 +1,4 @@
+import Browser from 'webextension-polyfill'
 import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
@@ -158,7 +159,7 @@ export const SearchInput = () => {
           focus:rounded-md`,
           isSeachFieldFocus && 'border-primary'
         )}
-        placeholder="Breezing through the web"
+        placeholder={Browser.i18n.getMessage('input_placeholder')}
       />
 
       {/* Search Engien Buttons */}

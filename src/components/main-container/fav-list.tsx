@@ -1,3 +1,4 @@
+import Browser from 'webextension-polyfill'
 import { useState } from 'react'
 import { FavItem, useFavListStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -7,7 +8,6 @@ import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 import { FavListItem } from './fav-list-item'
-import Browser from 'webextension-polyfill'
 
 export const FavList = () => {
   const favList = useFavListStore((state) => state.favList)

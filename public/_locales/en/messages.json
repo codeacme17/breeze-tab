@@ -2,6 +2,13 @@
   "extension_name": {
     "message": "Breeze Tab: Your everyday tab, now breezier"
   },
+  "extension_slogan": {
+    "message": "Your everyday tab, now breezier"
+  },
+
+  "input_placeholder": {
+    "message": "Breezing through the web"
+  },
 
   "setting_title": {
     "message": "Setting"

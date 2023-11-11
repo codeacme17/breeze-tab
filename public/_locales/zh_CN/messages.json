@@ -1,7 +1,15 @@
 {
   "extension_name": {
-    "message": "Breeze Tab: Your everyday tab, now breezier"
+    "message": "Breeze Tab: 让您的标签页更加便捷、清爽"
   },
+  "extension_slogan": {
+    "message": "让您的标签页更加便捷、清爽"
+  },
+
+  "input_placeholder": {
+    "message": "Breezing through the web"
+  },
+
   "setting_title": {
     "message": "设置"
   },
@@ -13,5 +21,48 @@
   },
   "setting_color": {
     "message": "配色"
+  },
+
+  "right_memu_modify": {
+    "message": "修改"
+  },
+  "right_memu_delete": {
+    "message": "移除"
+  },
+
+  "fav_add": {
+    "message": "新增"
+  },
+  "fav_dialog_title_modify": {
+    "message": "修改项目"
+  },
+  "fav_dialog_title_add": {
+    "message": "新增项目"
+  },
+  "fav_dialog_form_label": {
+    "message": "标签"
+  },
+  "fav_dialog_form_URL": {
+    "message": "网址"
+  },
+  "fav_dialog_form_Logo_URL": {
+    "message": "图标网址"
+  },
+  "fav_dialog_form_short_key": {
+    "message": "快捷字段"
+  },
+  "fav_dialog_form_search_field": {
+    "message": "搜索字段"
+  },
+  "fav_dialog_form_confirm": {
+    "message": "确认"
+  },
+
+  "popup_add_current": {
+    "message": "将当前页面添加到收藏列表"
+  },
+
+  "hint_invalid_page": {
+    "message": "当前页面不是一个有效的页面"
   }
 }

@@ -1,4 +1,4 @@
-import browser from 'webextension-polyfill'
+import Browser from 'webextension-polyfill'
 import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { FavItem, useFavListStore } from '@/store'
@@ -12,14 +12,14 @@ import { Construction } from 'lucide-react'
 const Popup = () => {
   const addFav = useFavListStore((state) => state.addFav)
 
-  const [currentPageInfo, setCurrentPageInfo] = useState<browser.Tabs.Tab>()
+  const [currentPageInfo, setCurrentPageInfo] = useState<Browser.Tabs.Tab>()
   const [isValidUrl, setIsValidUrl] = useState(false)
   const [label, setLabel] = useState('')
   const [shortKey, setShortKey] = useState('')
 
   useEffect(() => {
     const getCurrentPageInfo = async () => {
-      const tabs = await browser.tabs.query({
+      const tabs = await Browser.tabs.query({
         active: true,
         currentWindow: true,
       })
@@ -69,7 +69,7 @@ const Popup = () => {
 
       <form onSubmit={handleAdd} className="-mt-6">
         <Label>
-          {browser.i18n.getMessage('fav_dialog_form_label')}{' '}
+          {Browser.i18n.getMessage('fav_dialog_form_label')}{' '}
           <span className="text-primary">*</span>
         </Label>
         <Input
@@ -81,7 +81,7 @@ const Popup = () => {
           }}
         />
 
-        <Label>{browser.i18n.getMessage('fav_dialog_form_short_key')}</Label>
+        <Label>{Browser.i18n.getMessage('fav_dialog_form_short_key')}</Label>
         <Input
           className="h-8 mt-1"
           placeholder="g"
@@ -96,7 +96,7 @@ const Popup = () => {
           variant="secondary"
           disabled={!label.trim()}
           type="submit">
-          {browser.i18n.getMessage('popup_add_current')}
+          {Browser.i18n.getMessage('popup_add_current')}
         </Button>
       </form>
     </section>
@@ -108,7 +108,7 @@ const ErroHint = () => {
     <section className="w-60 text-center h-28 flex flex-col justify-center items-center select-none">
       <Construction className="mb-1" />
       <p>Oops...</p>
-      <p>{browser.i18n.getMessage('hint_invalid_page')}</p>
+      <p>{Browser.i18n.getMessage('hint_invalid_page')}</p>
     </section>
   )
 }
