@@ -83,15 +83,15 @@ export const SettingMenu = () => {
         <DropdownMenuItem>
           {colorCollection.map((item) => (
             <button
-              className="flex h-7 w-7 mr-2 items-center justify-center rounded-full border-[1px] border-foreground/30"
+              className="flex mr-2 items-center justify-center rounded-full"
               data-state="closed"
               key={item}
               onClick={() => setColor(item as Color)}>
               <span
                 className={cn(
-                  `flex h-7 w-7 items-center justify-center rounded-full`,
+                  `flex h-7 w-7 items-center justify-center rounded-full border-2 border-foreground/20`,
                   {
-                    'border-2 border-foreground/70': color === item,
+                    'border-2 border-foreground/100': color === item,
                   }
                 )}
                 style={{

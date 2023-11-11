@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster'
 
 function App() {
   return (
-    <main className="h-screen w-screen bg-background/10 font-[Poppins]">
+    <main className="h-screen w-screen bg-background font-[Poppins]">
       <Navbar />
       <MainContainer />
       <Toaster />

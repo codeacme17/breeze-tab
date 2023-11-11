@@ -13,8 +13,10 @@ export const SearchInput = () => {
   const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
   const searchInputRef = useRef<HTMLInputElement>(null)
 
-  const [searchEngine, setSearchEngine] =
-    useLocalStorage<SearchEngine>('bz:search-engine', 'bing')
+  const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
+    'bz:search-engine',
+    'bing'
+  )
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
     SEARCH_ENGINE[searchEngine!] || ''
   )
@@ -22,13 +24,10 @@ export const SearchInput = () => {
   const favList = useFavListStore((state) => state.favList)
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
-  const [currentFavItem, setCurrentFavItem] =
-    useState<FavItem | null>()
+  const [currentFavItem, setCurrentFavItem] = useState<FavItem | null>()
   const [isSeachFieldFocus, setIsSeachFieldFocus] = useState(false)
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.trim()
     setCurrentFavItem(null)
     setIsSeachFieldFocus(false)
@@ -58,9 +57,7 @@ export const SearchInput = () => {
     setIsSeachFieldFocus(true)
   }
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Tab') switchEngine(e)
     if (e.key === 'Enter') handleEnter()
   }
@@ -76,8 +73,7 @@ export const SearchInput = () => {
     // Normal search by search engine
     if (!currentFavItem) return runSearchEngine()
     // Redirect to the fav item url
-    if (!isSeachFieldFocus)
-      return window.location.assign(currentFavItem.url)
+    if (!isSeachFieldFocus) return window.location.assign(currentFavItem.url)
     // Redirect to the fav item search field url
     if (isSeachFieldFocus) {
       const chunks = searchInputRef.current?.value.split(':')
@@ -91,11 +87,7 @@ export const SearchInput = () => {
   }
 
   const runSearchEngine = () => {
-    if (
-      !searchInputRef.current ||
-      !searchInputRef.current.value.trim()
-    )
-      return
+    if (!searchInputRef.current || !searchInputRef.current.value.trim()) return
     const searchInput = searchInputRef.current.value.trim()
     const targetUrl = searchEngineUrl + searchInput
     window.location = targetUrl as unknown as Location
@@ -116,12 +108,8 @@ export const SearchInput = () => {
         htmlFor="search-input">
         {currentFavItem ? (
           <img
-            src={
-              currentFavItem.logoUrl || currentFavItem.canvasLogoUrl
-            }
-            onError={(e: any) =>
-              (e.target.src = currentFavItem.canvasLogoUrl)
-            }
+            src={currentFavItem.logoUrl || currentFavItem.canvasLogoUrl}
+            onError={(e: any) => (e.target.src = currentFavItem.canvasLogoUrl)}
             className="w-6 h-6"
           />
         ) : (
@@ -150,8 +138,8 @@ export const SearchInput = () => {
           duration-200 
           shadow-inner 
           border-[1px]
-          bg-background/60
-          dark:border-background-foreground
+          border-muted-foreground/80
+          bg-transparent
           placeholder:text-muted-foreground/50 
           placeholder:text-base 
           placeholder:select-none 
@@ -177,21 +165,21 @@ export const SearchInput = () => {
           onClick={() => setSearchEngine('bing')}
           classname={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'bing' ? 'fill-primary/70' : ''
+            searchEngine === 'bing' ? 'fill-primary' : ''
           )}
         />
         <GoogleIcon
           onClick={() => setSearchEngine('google')}
           classname={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'google' ? 'fill-primary/70' : ''
+            searchEngine === 'google' ? 'fill-primary' : ''
           )}
         />
         <BaiduIcon
           onClick={() => setSearchEngine('baidu')}
           classname={cn(
             'fill-muted-foreground/50 cursor-pointer',
-            searchEngine === 'baidu' ? 'fill-primary/70' : ''
+            searchEngine === 'baidu' ? 'fill-primary' : ''
           )}
         />
       </div>
