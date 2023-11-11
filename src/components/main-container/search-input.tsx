@@ -27,18 +27,21 @@ export const SearchInput = () => {
   const [currentFavItem, setCurrentFavItem] = useState<FavItem | null>()
   const [isSeachFieldFocus, setIsSeachFieldFocus] = useState(false)
 
+  const [inputValue, setInputValue] = useState('')
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.trim()
+    setInputValue(e.target.value)
     setCurrentFavItem(null)
     setIsSeachFieldFocus(false)
 
-    if (!inputValue) return
+    const _inputValue = e.target.value.trim()
+    if (!_inputValue) return
 
-    const chunks = inputValue.split(':')
-
+    // Redirect to the fav item url
+    const chunks = _inputValue.split(':')
     if (!!chunks[0].trim() && chunks.length > 1) {
       checkIsSearchField(chunks)
-    } else checkIsShortKey(inputValue)
+    } else checkIsShortKey(_inputValue)
   }
 
   const checkIsShortKey = (inputValue: string) => {
@@ -70,10 +73,19 @@ export const SearchInput = () => {
   }
 
   const handleEnter = () => {
+    // Redirect to the normal url
+    if (
+      inputValue.trim().toLocaleLowerCase().startsWith('http://') ||
+      inputValue.trim().toLocaleLowerCase().startsWith('https://')
+    )
+      return window.location.assign(inputValue)
+
     // Normal search by search engine
     if (!currentFavItem) return runSearchEngine()
+
     // Redirect to the fav item url
     if (!isSeachFieldFocus) return window.location.assign(currentFavItem.url)
+
     // Redirect to the fav item search field url
     if (isSeachFieldFocus) {
       const chunks = searchInputRef.current?.value.split(':')
@@ -121,6 +133,7 @@ export const SearchInput = () => {
       <input
         id="search-input"
         ref={searchInputRef}
+        value={inputValue}
         onKeyDown={handleKeyDown}
         onChange={handleInputChange}
         type="text"
