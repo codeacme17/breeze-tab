@@ -28,14 +28,12 @@ export const Navbar = () => {
             />
           </DialogTrigger>
           <DialogContent className="bg-background">
-            <DialogHeader className="-mt-4">
+            <DialogHeader className="-mt-4 -ml-3">
               <Button
                 size="icon"
                 variant="ghost"
                 onClick={() =>
-                  window.open(
-                    'https://github.com/codeacme17/breeze-tab'
-                  )
+                  window.open('https://github.com/codeacme17/breeze-tab')
                 }>
                 <Github className="w-4 h-4" />
               </Button>
@@ -55,7 +53,7 @@ export const Navbar = () => {
                 />
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
-              <h4 className="mb-5 text-muted-foreground">
+              <h4 className="mb-4 text-muted-foreground text-base">
                 Your everyday tab, now breezier
               </h4>
               <p className="text-sm">
