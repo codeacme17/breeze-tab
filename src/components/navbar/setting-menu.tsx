@@ -2,7 +2,7 @@ import { useTheme } from '@/contexts/theme-provider'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { useExpendFavStore } from '@/store'
-import { COLORS } from '@/lib/constants'
+import { COLORS } from '@/lib/colors'
 
 import {
   DropdownMenu,
