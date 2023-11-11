@@ -1,11 +1,13 @@
 {
-  "name": "vite-project",
+  "name": "breeze-tab",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A browser new tab extension, similar to Chrome tab but better",
+  "author": "leyoonafr <codeacme17@gmail.com>",
+  "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "dev:extension": "vite dev",
+    "dev": "vite dev",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
