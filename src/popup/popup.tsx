@@ -62,18 +62,19 @@ const Popup = () => {
   }
 
   return (
-    <section className="flex flex-col justify-center text-foreground w-96 px-2 py-4">
-      <div className="flex items-center mb-4 ml-auto">
-        <img src="/logo.png" className="w-6 h-6" />
-      </div>
+    <section className="flex flex-col justify-center text-foreground w-96 p-3">
+      <h2 className="text-lg flex items-center select-none">
+        <img src="/logo.png" className="w-6 h-6 mr-2" />
+        {Browser.i18n.getMessage('popup_add_current')}
+      </h2>
 
-      <form onSubmit={handleAdd} className="-mt-6">
+      <form onSubmit={handleAdd} className="mt-3">
         <Label>
           {Browser.i18n.getMessage('fav_dialog_form_label')}{' '}
           <span className="text-primary">*</span>
         </Label>
         <Input
-          className="h-8 mb-4 mt-1"
+          className="h-9 mb-4 mt-1"
           placeholder="Google"
           value={label}
           onChange={({ target }) => {
@@ -83,20 +84,19 @@ const Popup = () => {
 
         <Label>{Browser.i18n.getMessage('fav_dialog_form_short_key')}</Label>
         <Input
-          className="h-8 mt-1"
+          className="h-9 mt-1"
           placeholder="g"
           value={shortKey}
           onChange={({ target }) => {
             setShortKey(target.value)
           }}
         />
-
         <Button
           className="w-full mt-3"
           variant="secondary"
           disabled={!label.trim()}
           type="submit">
-          {Browser.i18n.getMessage('popup_add_current')}
+          {Browser.i18n.getMessage('fav_dialog_form_confirm')}
         </Button>
       </form>
     </section>
