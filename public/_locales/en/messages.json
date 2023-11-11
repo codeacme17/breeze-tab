@@ -1,0 +1,68 @@
+{
+  "extension_name": {
+    "message": "Breeze Tab: Your everyday tab, now breezier"
+  },
+  "extension_slogan": {
+    "message": "Your everyday tab, now breezier"
+  },
+
+  "input_placeholder": {
+    "message": "Breezing through the web"
+  },
+
+  "setting_title": {
+    "message": "Setting"
+  },
+  "setting_dark_mode": {
+    "message": "Dark Mode"
+  },
+  "setting_show_fav_list": {
+    "message": "Show Fav-List"
+  },
+  "setting_color": {
+    "message": "Color"
+  },
+
+  "right_memu_modify": {
+    "message": "Modify"
+  },
+  "right_memu_delete": {
+    "message": "Remove"
+  },
+
+  "fav_add": {
+    "message": "Add New"
+  },
+  "fav_dialog_title_modify": {
+    "message": "Modify Item"
+  },
+  "fav_dialog_title_add": {
+    "message": "Add Item"
+  },
+  "fav_dialog_form_label": {
+    "message": "Label"
+  },
+  "fav_dialog_form_URL": {
+    "message": "URL"
+  },
+  "fav_dialog_form_Logo_URL": {
+    "message": "Logo URL"
+  },
+  "fav_dialog_form_short_key": {
+    "message": "Short Key"
+  },
+  "fav_dialog_form_search_field": {
+    "message": "Search Field"
+  },
+  "fav_dialog_form_confirm": {
+    "message": "Confirm"
+  },
+
+  "popup_add_current": {
+    "message": "Add current page to fav-list"
+  },
+
+  "hint_invalid_page": {
+    "message": "Current page is not a valid page"
+  }
+}

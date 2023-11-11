@@ -1,3 +1,4 @@
+import Browser from 'webextension-polyfill'
 import { useState } from 'react'
 import { FavItem, useFavListStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -95,7 +96,9 @@ export const FavList = () => {
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>
 
-          <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
+          <p className="text-sm mt-2 text-muted-foreground/70">
+            {Browser.i18n.getMessage('fav_add')}
+          </p>
         </div>
       </ReactSortable>
 

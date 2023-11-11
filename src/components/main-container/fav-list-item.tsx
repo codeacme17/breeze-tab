@@ -7,6 +7,7 @@ import {
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
 import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
+import Browser from 'webextension-polyfill'
 
 interface FavListItemProps {
   item: FavItem
@@ -82,10 +83,12 @@ export const FavListItem = ({
 
         <ContextMenuContent className="bg-background">
           <ContextMenuItem onClick={() => onModify(item)}>
-            <Pencil className="w-4 h-4 mr-2" /> Modify
+            <Pencil className="w-4 h-4 mr-2" />
+            {Browser.i18n.getMessage('right_memu_modify')}
           </ContextMenuItem>
           <ContextMenuItem onClick={() => onRemove(item)}>
-            <Trash2 className="w-4 h-4 mr-2" /> Remove
+            <Trash2 className="w-4 h-4 mr-2" />
+            {Browser.i18n.getMessage('right_memu_delete')}
           </ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuTrigger>

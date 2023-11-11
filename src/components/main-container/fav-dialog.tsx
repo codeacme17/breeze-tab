@@ -1,4 +1,5 @@
 import * as z from 'zod'
+import Browser from 'webextension-polyfill'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -99,7 +100,11 @@ export const FavDialog = ({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{type} Item</DialogTitle>
+          <DialogTitle>
+            {type === 'Modify'
+              ? Browser.i18n.getMessage('fav_dialog_title_modify')
+              : Browser.i18n.getMessage('fav_dialog_title_add')}
+          </DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -110,7 +115,8 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    Label <span className="text-primary">*</span>
+                    {Browser.i18n.getMessage('fav_dialog_form_label')}{' '}
+                    <span className="text-primary">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -129,7 +135,8 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    URL <span className="text-primary">*</span>
+                    {Browser.i18n.getMessage('fav_dialog_form_URL')}{' '}
+                    <span className="text-primary">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -148,7 +155,7 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    Logo URL
+                    {Browser.i18n.getMessage('fav_dialog_form_Logo_URL')}
                   </FormLabel>
                   <Input
                     placeholder="https://google.com/favicon.ico"
@@ -165,7 +172,7 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    Short Key
+                    {Browser.i18n.getMessage('fav_dialog_form_short_key')}
                   </FormLabel>
                   <Input placeholder="google" className="bg-muted" {...field} />
                 </FormItem>
@@ -178,7 +185,7 @@ export const FavDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-muted-foreground">
-                    Search Field
+                    {Browser.i18n.getMessage('fav_dialog_form_search_field')}
                   </FormLabel>
                   <Input
                     placeholder="search?q="
@@ -192,7 +199,7 @@ export const FavDialog = ({
             <div className="mb-3" />
 
             <Button type="submit" className="w-full bg-primary/80">
-              Confirm
+              {Browser.i18n.getMessage('fav_dialog_form_confirm')}
             </Button>
           </form>
         </Form>

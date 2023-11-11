@@ -15,6 +15,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Settings, Moon, Layers2, Check } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Browser from 'webextension-polyfill'
 
 type Color = keyof typeof COLORS
 
@@ -52,7 +53,9 @@ export const SettingMenu = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-60 bg-background">
-        <DropdownMenuLabel>Setting</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {Browser.i18n.getMessage('setting_title')}
+        </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
@@ -61,7 +64,8 @@ export const SettingMenu = () => {
           className="flex justify-between cursor-pointer"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           <div className="flex items-center">
-            <Moon className="w-4 h-4 mr-2" /> Dark Mode
+            <Moon className="w-4 h-4 mr-2" />
+            {Browser.i18n.getMessage('setting_dark_mode')}
           </div>
           <Switch checked={theme === 'dark'} />
         </DropdownMenuItem>
@@ -71,7 +75,8 @@ export const SettingMenu = () => {
           className="flex justify-between cursor-pointer"
           onClick={() => troggleIsExpendFav(!isExpendFav)}>
           <div className="flex items-center">
-            <Layers2 className="w-4 h-4 mr-2" /> Show Fav List
+            <Layers2 className="w-4 h-4 mr-2" />
+            {Browser.i18n.getMessage('setting_show_fav_list')}
           </div>
           <Switch checked={isExpendFav} />
         </DropdownMenuItem>
@@ -79,7 +84,9 @@ export const SettingMenu = () => {
         <DropdownMenuSeparator />
 
         {/* Colors switch */}
-        <DropdownMenuLabel>Color</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {Browser.i18n.getMessage('setting_color')}
+        </DropdownMenuLabel>
         <DropdownMenuItem>
           {colorCollection.map((item) => (
             <button
