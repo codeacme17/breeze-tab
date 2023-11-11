@@ -1,0 +1,17 @@
+{
+  "extension_name": {
+    "message": "Breeze Tab: Your everyday tab, now breezier"
+  },
+  "setting_title": {
+    "message": "设置"
+  },
+  "setting_dark_mode": {
+    "message": "深色模式"
+  },
+  "setting_show_fav_list": {
+    "message": "展开收藏列表"
+  },
+  "setting_color": {
+    "message": "配色"
+  }
+}

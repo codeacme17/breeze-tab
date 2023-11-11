@@ -7,6 +7,7 @@ import { ContextMenu } from '@/components/ui/context-menu'
 import { Plus } from 'lucide-react'
 import { FavDialog } from './fav-dialog'
 import { FavListItem } from './fav-list-item'
+import Browser from 'webextension-polyfill'
 
 export const FavList = () => {
   const favList = useFavListStore((state) => state.favList)
@@ -95,7 +96,9 @@ export const FavList = () => {
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>
 
-          <p className="text-sm mt-2 text-muted-foreground/70">Add New</p>
+          <p className="text-sm mt-2 text-muted-foreground/70">
+            {Browser.i18n.getMessage('fav_add')}
+          </p>
         </div>
       </ReactSortable>
 
