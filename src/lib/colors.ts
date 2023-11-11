@@ -76,7 +76,7 @@ export const COLORS = {
     }
    
     .dark {
-      --background: 240 0% 12%;
+      --background: 240 0% 8%;
       --foreground: 0 0% 98%;
       --card: 240 10% 3.9%;
       --card-foreground: 0 0% 98%;
