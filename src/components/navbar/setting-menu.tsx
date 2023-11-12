@@ -23,7 +23,7 @@ export const SettingMenu = () => {
   const { theme, setTheme } = useTheme()
   const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
   const troggleIsExpendFav = useExpendFavStore(
-    (state) => state.troggleIsExpendFav
+    (state) => state.troggleIsExpendFav,
   )
 
   const [color, setColor] = useLocalStorage<Color>('color', 'gray')
@@ -99,7 +99,7 @@ export const SettingMenu = () => {
                   `flex h-7 w-7 items-center justify-center rounded-full border-2 border-foreground/20`,
                   {
                     'border-2 border-foreground/100': color === item,
-                  }
+                  },
                 )}
                 style={{
                   backgroundColor: COLORS[item as Color].main,

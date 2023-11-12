@@ -90,7 +90,7 @@ export const FavList = () => {
             rounded-lg 
             cursor-pointer
             `,
-            isDragging ? '' : 'hover:bg-muted/70'
+            isDragging ? '' : 'hover:bg-muted/70',
           )}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />

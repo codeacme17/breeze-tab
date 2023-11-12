@@ -27,7 +27,7 @@ const Popup = () => {
       setIsValidUrl(
         tabs[0]?.url?.startsWith('http') ||
           tabs[0]?.url?.startsWith('https') ||
-          false
+          false,
       )
       setCurrentPageInfo(tabs[0])
       setLabel(tabs[0]?.title || '')

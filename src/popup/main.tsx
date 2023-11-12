@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <ThemeProvider defaultTheme="light">
     <Popup />
     <Toaster />
-  </ThemeProvider>
+  </ThemeProvider>,
 )

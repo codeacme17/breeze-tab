@@ -45,7 +45,7 @@ export const FavListItem = ({
             rounded-lg 
           `,
           isDragging ? 'cursor-grabbing' : 'hover:bg-muted/70 cursor-pointer',
-          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : ''
+          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : '',
         )}>
         <div onClick={() => window.location.assign(item.url)}>
           <div
@@ -71,7 +71,7 @@ export const FavListItem = ({
               'handle absolute right-2 top-2 transition-opacity opacity-0 ',
               isDragging
                 ? 'opacity-0 cursor-grabbing'
-                : 'group-hover:opacity-100 cursor-grab'
+                : 'group-hover:opacity-100 cursor-grab',
             )}>
             <GripHorizontal className="stroke-muted-foreground" />
           </div>
