@@ -1,17 +1,22 @@
 <br />
 
 <p align="center"> 
-  <img src="/public/logo.png" width="130" />
+  
+  ![Github](https://github.com/codeacme17/breeze-tab/assets/67408722/a19ad7ea-712e-4bd8-9367-ac6e6cd4efb9)
+  
 </p>
 
-<samp>
-<h1 align="center">Breeze Tab</h1>
+# Breeze Tab
 
-<p align="center"> 
 A browser new tab extension, similar to Chrome tab but better
+
+<p>  
+<a href="/docs/zh-docs.md"> 
+  <img src="https://img.shields.io/badge/中文文档-%23242D3E?style=flat&labelColor=%23242D3E&logo=microsofttranslator" />
+</a>
+
+<img src="https://img.shields.io/badge/License-MIT-%23242D3E?style=flat&labelColor=%23242D3E" />
 </p>
-</samp>
-<br />
 
 ## Inspiration
 
@@ -47,6 +52,20 @@ Users can add `shortcut key` to their bookmarked URLs. This is done by setting t
 Users can add `search fields` to their bookmarked URLs. This is done by setting the `shortcut field` in the bookmark form. Once set, users can use `<shortcut key>: [search content]` to directly jump to the search page of that URL and get search results.
 
 <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/25be68bf-0e8e-4416-8c33-49d000419db4" />
+
+## Download
+
+<p>
+  <a href="">
+    <img height="60" src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg">
+  </a>
+  <a href="">
+    <img height="60" src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png"/>
+  </a>
+  <a href="">
+    <img height="60" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/320px-Get_it_from_Microsoft_Badge.svg.png"/>
+  </a>
+</p>
 
 ## Demo
 
