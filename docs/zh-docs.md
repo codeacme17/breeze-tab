@@ -1,16 +1,9 @@
-<br />
+![Github](https://github.com/codeacme17/breeze-tab/assets/67408722/a19ad7ea-712e-4bd8-9367-ac6e6cd4efb9)
 
-<p align="center"> 
-  <img src="/public/logo.png" width="130" />
-</p>
+# Breeze Tab
 
-<samp>
-<h1 align="center">Breeze Tab</h1>
-
-<p align="center"> 
 一款新标签页浏览器插件，类似于原生 chrome 标签页但更优秀
-</p>
-</samp>
+
 <br />
 
 ## 动机
