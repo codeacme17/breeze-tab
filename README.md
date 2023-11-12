@@ -1,5 +1,5 @@
-![Github](https://github.com/codeacme17/breeze-tab/assets/67408722/a19ad7ea-712e-4bd8-9367-ac6e6cd4efb9)
-  
+![Github1](https://github.com/codeacme17/breeze-tab/assets/67408722/7a49fa1b-aa84-4bd0-87b4-acf6b28b34f3)
+
 # Breeze Tab
 
 A browser new tab extension, similar to Chrome tab but better
