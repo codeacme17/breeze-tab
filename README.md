@@ -12,11 +12,11 @@ A browser new tab extension, similar to Chrome tab but better
 <img src="https://img.shields.io/badge/License-MIT-%23df784a?style=flat&labelColor=%23df784a" />
 </p>
 
-## Inspiration
+## 💡 Inspiration
 
 I really appreciate the simplicity of Chrome's native tab page, but it's a bit too "simple" for my liking. While using it, I always thought it would be great if it had additional functionalities. Therefore, I decided to develop this extension. The goal is to enhance its functionality while maintaining its simplicity, providing more convenient and powerful features.
 
-## Features
+## ✨ Features
 
 ### Switching Search Engines
 
@@ -47,7 +47,7 @@ Users can add `search fields` to their bookmarked URLs. This is done by setting 
 
 <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/25be68bf-0e8e-4416-8c33-49d000419db4" />
 
-## Download
+## 📦 Download
 
 <p>
   <a href="">
