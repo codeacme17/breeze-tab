@@ -12,10 +12,10 @@ A browser new tab extension, similar to Chrome tab but better
 
 <p>  
 <a href="/docs/zh-docs.md"> 
-  <img src="https://img.shields.io/badge/中文文档-%23242D3E?style=flat&labelColor=%23242D3E&logo=microsofttranslator" />
+  <img src="https://img.shields.io/badge/中文文档-%23df784a?style=flat&labelColor=%23df784a&logo=microsofttranslator" />
 </a>
 
-<img src="https://img.shields.io/badge/License-MIT-%23242D3E?style=flat&labelColor=%23242D3E" />
+<img src="https://img.shields.io/badge/License-MIT-%23df784a?style=flat&labelColor=%23df784a" />
 </p>
 
 ## Inspiration
