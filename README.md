@@ -27,6 +27,7 @@ Users can quickly switch search engines by pressing the `tab` key after focusing
 Users can add favorites in two ways:
 
 - After visiting a website, click on the breeze tab icon in the browser extension to pop up a form to bookmark the site. Clicking `Confirm` will add the site to the favorites list (recommended).
+  
   <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/3d2f30e0-d267-4778-8137-3d5d11e78eb4" />
   
 
@@ -35,6 +36,7 @@ Users can add favorites in two ways:
 ### Shortcut key
 
 Users can add `shortcut key` to their bookmarked URLs. This is done by setting the `shortcut field` in the bookmark form. Once set, users can enter the shortcut field in the search box to directly navigate to that URL.
+
 <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/fd8d7699-d59d-4320-b27d-216857f6e992" />
 
 
