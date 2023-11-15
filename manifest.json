@@ -9,7 +9,7 @@
     "128": "icon/128.png"
   },
   "default_locale": "en",
-  "permissions": ["storage", "tabs"],
+  "permissions": ["tabs"],
   "background": {
     "service_worker": "src/scripts/background.ts"
   },
