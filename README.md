@@ -52,13 +52,15 @@ Users can add `search fields` to their bookmarked URLs. This is done by setting 
 ## 📦 Download
 
 <p>
+  <!--
   <a href="">
     <img height="60" src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg">
   </a>
+  -->
   <a href="">
     <img height="60" src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png"/>
   </a>
-  <a href="">
+  <a href="https://microsoftedge.microsoft.com/addons/detail/breeze-tab/bphpgnckmljhojpeojbhkbihlclphban">
     <img height="60" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/320px-Get_it_from_Microsoft_Badge.svg.png"/>
   </a>
 </p>
