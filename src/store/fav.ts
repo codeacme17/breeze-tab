@@ -52,7 +52,7 @@ export const useFavListStore = create<FavListState>((set) => {
     modifyFav: (fav: FavItem) => {
       set((state) => {
         const favList = state.favList.map((item) => {
-          if (item.url === fav.url) return fav
+          if (item.id === fav.id) return fav
           return item
         })
         localStorage.setItem('bz:fav-list', JSON.stringify(favList))
