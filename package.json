@@ -1,7 +1,7 @@
 {
   "name": "breeze-tab",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A browser new tab extension, similar to Chrome tab but better",
   "author": "leyoonafr <codeacme17@gmail.com>",
   "license": "MIT",
