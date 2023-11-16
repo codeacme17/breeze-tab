@@ -57,7 +57,7 @@ Users can add `search fields` to their bookmarked URLs. This is done by setting 
     <img height="60" src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg">
   </a>
   -->
-  <a href="">
+  <a href="https://chromewebstore.google.com/detail/breeze-tab/hphploadgopiogppepboclkiaiphfokl?hl=en-US&utm_source=ext_sidebar">
     <img height="60" src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png"/>
   </a>
   <a href="https://microsoftedge.microsoft.com/addons/detail/breeze-tab/bphpgnckmljhojpeojbhkbihlclphban">
