@@ -1,5 +1,5 @@
 import Browser from 'webextension-polyfill'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
@@ -19,10 +19,10 @@ export const SearchInput = () => {
 
   const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
     'bz:search-engine',
-    'bing'
+    'bing',
   )
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINE[searchEngine!] || ''
+    SEARCH_ENGINE[searchEngine!] || '',
   )
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
@@ -46,14 +46,14 @@ export const SearchInput = () => {
 
   const checkIsShortKey = (inputValue: string) => {
     const matchItem = favList.find(
-      (item) => item.shortKey === inputValue.toLowerCase()
+      (item) => item.shortKey === inputValue.toLowerCase(),
     )
     setCurrentFavItem(matchItem || null)
   }
 
   const checkIsSearchField = (chunks: string[]) => {
     const matchItem = favList.find(
-      (item) => item.shortKey === chunks[0].toLowerCase()
+      (item) => item.shortKey === chunks[0].toLowerCase(),
     )
     if (!matchItem?.searchField) return
     setCurrentFavItem(matchItem)
@@ -62,7 +62,7 @@ export const SearchInput = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Tab') switchEngine(e)
-    if (e.key === 'Enter') handleEnter()
+    if (e.key === 'Enter') handleEnter(e)
   }
 
   const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -72,7 +72,9 @@ export const SearchInput = () => {
     else if (searchEngine === 'baidu') setSearchEngine('bing')
   }
 
-  const handleEnter = () => {
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 229) return
+
     // Redirect to the normal url
     if (
       inputValue.trim().toLocaleLowerCase().startsWith('http://') ||
@@ -116,7 +118,7 @@ export const SearchInput = () => {
     <section
       className={cn(
         'w-full relative transition-[margin]',
-        isExpendFav ? 'mt-40' : 'mt-56'
+        isExpendFav ? 'mt-40' : 'mt-56',
       )}>
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
@@ -160,7 +162,7 @@ export const SearchInput = () => {
           placeholder:text-base 
           placeholder:select-none 
           focus:rounded-md`,
-          isSeachFieldFocus && 'border-primary'
+          isSeachFieldFocus && 'border-primary',
         )}
         placeholder={Browser.i18n.getMessage('input_placeholder')}
       />
@@ -181,21 +183,21 @@ export const SearchInput = () => {
           onClick={() => setSearchEngine('bing')}
           className={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'bing' ? 'fill-primary' : ''
+            searchEngine === 'bing' ? 'fill-primary' : '',
           )}
         />
         <GoogleIcon
           onClick={() => setSearchEngine('google')}
           className={cn(
             'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'google' ? 'fill-primary' : ''
+            searchEngine === 'google' ? 'fill-primary' : '',
           )}
         />
         <BaiduIcon
           onClick={() => setSearchEngine('baidu')}
           className={cn(
             'fill-muted-foreground/50 cursor-pointer',
-            searchEngine === 'baidu' ? 'fill-primary' : ''
+            searchEngine === 'baidu' ? 'fill-primary' : '',
           )}
         />
       </div>
