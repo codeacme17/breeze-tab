@@ -1,6 +1,6 @@
 import Browser from 'webextension-polyfill'
 import { useState } from 'react'
-import { FavItem, useFavListStore } from '@/store'
+import { FavItem, useFavStore } from '@/store'
 import { cn } from '@/lib/utils'
 
 import { ReactSortable } from 'react-sortablejs'
@@ -10,9 +10,9 @@ import { FavDialog } from './fav-dialog'
 import { FavListItem } from './fav-list-item'
 
 export const FavList = () => {
-  const favList = useFavListStore((state) => state.favList)
-  const setFavList = useFavListStore((state) => state.setFavList)
-  const removeFav = useFavListStore((state) => state.removeFav)
+  const favList = useFavStore((state) => state.favList)
+  const setFavList = useFavStore((state) => state.setFavList)
+  const removeFav = useFavStore((state) => state.removeFav)
 
   const [isDragging, setIsDragging] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
@@ -90,7 +90,7 @@ export const FavList = () => {
             rounded-lg 
             cursor-pointer
             `,
-            isDragging ? '' : 'hover:bg-muted/70',
+            isDragging ? '' : 'hover:bg-muted/70'
           )}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />

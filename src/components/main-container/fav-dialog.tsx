@@ -3,7 +3,7 @@ import Browser from 'webextension-polyfill'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FavItem, useFavListStore } from '@/store'
+import { FavItem, useFavStore } from '@/store'
 import { isDulplicateFavItem } from '@/lib/handle-fav-item'
 import { nanoid } from 'nanoid'
 
@@ -52,8 +52,8 @@ export const FavDialog = ({
     searchField: '',
   }
 
-  const addFav = useFavListStore((state) => state.addFav)
-  const modifyFav = useFavListStore((state) => state.modifyFav)
+  const addFav = useFavStore((state) => state.addFav)
+  const modifyFav = useFavStore((state) => state.modifyFav)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

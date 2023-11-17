@@ -1,7 +1,7 @@
 import { useTheme } from '@/contexts/theme-provider'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
-import { useExpendFavStore } from '@/store'
+import { useFavStore } from '@/store'
 import { COLORS } from '@/lib/colors'
 
 import {
@@ -21,10 +21,8 @@ type Color = keyof typeof COLORS
 
 export const SettingMenu = () => {
   const { theme, setTheme } = useTheme()
-  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
-  const troggleIsExpendFav = useExpendFavStore(
-    (state) => state.troggleIsExpendFav,
-  )
+  const isExpendFav = useFavStore((state) => state.isExpend)
+  const troggleIsExpendFav = useFavStore((state) => state.troggleExpend)
 
   const [color, setColor] = useLocalStorage<Color>('color', 'gray')
   const [colorCollection, setColorCollection] = useState<string[]>([])
@@ -99,7 +97,7 @@ export const SettingMenu = () => {
                   `flex h-7 w-7 items-center justify-center rounded-full border-2 border-foreground/20`,
                   {
                     'border-2 border-foreground/100': color === item,
-                  },
+                  }
                 )}
                 style={{
                   backgroundColor: COLORS[item as Color].main,

@@ -1,5 +1,5 @@
 import { toast } from '@/components/ui/use-toast'
-import { FavItem, useFavListStore } from '@/store'
+import { FavItem, useFavStore } from '@/store'
 
 export const handleFavItem = (favItem: FavItem) => {
   favItem = createCanvaseLogo(favItem)
@@ -27,7 +27,7 @@ const drawReserveLogo = (favItem: FavItem) => {
     canvas.height / 2,
     canvas.width / 2,
     0,
-    2 * Math.PI,
+    2 * Math.PI
   )
   bgCtx.fillStyle = `hsl(${Math.random() * 1000}, 70%, 50%)`
   bgCtx.fill()
@@ -43,17 +43,17 @@ const drawReserveLogo = (favItem: FavItem) => {
   textCtx.fillText(
     favItem.label.substr(0, 1).toUpperCase(),
     canvas.width / 2,
-    canvas.height / 2 + canvas.height / 16,
+    canvas.height / 2 + canvas.height / 16
   )
   return canvas
 }
 
 export const isDulplicateFavItem = (favItem: FavItem) => {
-  const favList = useFavListStore.getState().favList
+  const favList = useFavStore.getState().favList
   const is = favList.find(
     (item) =>
       (item.url === favItem.url || item.label === favItem.label) &&
-      item.id !== favItem.id,
+      item.id !== favItem.id
   )
 
   if (is)

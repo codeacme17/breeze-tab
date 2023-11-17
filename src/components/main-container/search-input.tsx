@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
-import { FavItem, useExpendFavStore, useFavListStore } from '@/store'
+import { FavItem, useFavStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
@@ -11,8 +11,8 @@ import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
 type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
 
 export const SearchInput = () => {
-  const favList = useFavListStore((state) => state.favList)
-  const isExpendFav = useExpendFavStore((state) => state.isExpendFav)
+  const favList = useFavStore((state) => state.favList)
+  const isExpendFav = useFavStore((state) => state.isExpend)
 
   const [inputValue, setInputValue] = useState('')
   const searchInputRef = useRef<HTMLInputElement>(null)

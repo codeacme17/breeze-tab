@@ -12,25 +12,24 @@ export type FavItem = {
   canvasLogoUrl?: string
 }
 
-interface FavListState {
+interface FavState {
   favList: FavItem[]
+  isExpend: boolean
   setFavList: (favList: FavItem[]) => void
   addFav: (fav: FavItem) => void
   modifyFav: (fav: FavItem) => void
   removeFav: (fav: FavItem) => void
+  troggleExpend: (is: boolean) => void
 }
 
-interface ExpendFavState {
-  isExpendFav: boolean
-  troggleIsExpendFav: (is: boolean) => void
-}
-
-export const useFavListStore = create<FavListState>((set) => {
+export const useFavStore = create<FavState>((set) => {
   if (!localStorage.getItem('bz:fav-list'))
     localStorage.setItem('bz:fav-list', JSON.stringify(DEFAUTL_FAV_LIST))
 
   return {
     favList: JSON.parse(localStorage.getItem('bz:fav-list')!),
+
+    isExpend: localStorage.getItem('bz:is-fav-expend') === 'true' || false,
 
     setFavList: (favList: FavItem[]) => {
       set((state) => {
@@ -67,15 +66,11 @@ export const useFavListStore = create<FavListState>((set) => {
         return { favList }
       })
     },
+
+    troggleExpend: (is: boolean) =>
+      set(() => {
+        localStorage.setItem('bz:is-fav-expend', is + '')
+        return { isExpend: is }
+      }),
   }
 })
-
-export const useExpendFavStore = create<ExpendFavState>((set) => ({
-  isExpendFav: localStorage.getItem('bz:is-fav-expend') === 'true' || false,
-
-  troggleIsExpendFav: (is: boolean) =>
-    set(() => {
-      localStorage.setItem('bz:is-fav-expend', is + '')
-      return { isExpendFav: is }
-    }),
-}))
