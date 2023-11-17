@@ -1,6 +1,9 @@
 import { cn } from '@/lib/utils'
 import { FavItem } from '@/store'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -59,8 +62,9 @@ export const FavListItem = ({
               items-center 
               bg-muted-foreground/20
             ">
-            <img
+            <LazyLoadImage
               src={item.logoUrl}
+              effect="blur"
               onError={(e: any) => (e.target.src = item.canvasLogoUrl)}
               className="w-6 h-6"
             />

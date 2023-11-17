@@ -1,7 +1,7 @@
 import Browser from 'webextension-polyfill'
 import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
-import { FavItem, useFavListStore } from '@/store'
+import { FavItem, useFavStore } from '@/store'
 import { handleFavItem, isDulplicateFavItem } from '@/lib/handle-fav-item'
 
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Construction } from 'lucide-react'
 
 const Popup = () => {
-  const addFav = useFavListStore((state) => state.addFav)
+  const addFav = useFavStore((state) => state.addFav)
 
   const [currentPageInfo, setCurrentPageInfo] = useState<Browser.Tabs.Tab>()
   const [isValidUrl, setIsValidUrl] = useState(false)
