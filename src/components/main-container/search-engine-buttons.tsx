@@ -1,14 +1,12 @@
 import { cn } from '@/lib/utils'
-import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
-import { useState } from 'react'
-import { DuckduckgoIcon } from '../icons/duckduckgo'
+import { SearchEngine, useSearchStore } from '@/store'
 
-export type SearchEngine =
-  | 'google'
-  | 'bing'
-  | 'baidu'
-  | 'duckduckgo'
-  | undefined
+import {
+  BaiduIcon,
+  BingIcon,
+  GoogleIcon,
+  DuckduckgoIcon,
+} from '@/components/icons'
 
 interface SearchEngineButtonsProps {
   searchEngine: SearchEngine
@@ -19,12 +17,7 @@ export const SearchEngineButtons = ({
   searchEngine,
   setSearchEngine,
 }: SearchEngineButtonsProps) => {
-  const [searchEngineList, setSearchEngineList] = useState<SearchEngine[]>([
-    'bing',
-    'google',
-    'baidu',
-    'duckduckgo',
-  ])
+  const searchEngineList = useSearchStore((state) => state.searchEngineList)
 
   return (
     <div
@@ -38,38 +31,29 @@ export const SearchEngineButtons = ({
         ease-in-out 
         duration-300 
         transition-[fill,opacity]
+        gap-2
       `}>
       {searchEngineList.map((engine: SearchEngine) => (
-        <div key={engine}>
+        <div key={engine} className="fill-muted-foreground/50 cursor-pointer">
           {engine === 'bing' ? (
             <BingIcon
               onClick={() => setSearchEngine('bing')}
-              className={cn(
-                'fill-muted-foreground/50 mr-2 cursor-pointer',
-                searchEngine === 'bing' ? 'fill-primary' : '',
-              )}
+              className={cn(searchEngine === 'bing' ? 'fill-primary' : '')}
             />
           ) : engine === 'baidu' ? (
             <BaiduIcon
               onClick={() => setSearchEngine('baidu')}
-              className={cn(
-                'fill-muted-foreground/50 mr-2 cursor-pointer',
-                searchEngine === 'baidu' ? 'fill-primary' : '',
-              )}
+              className={cn(searchEngine === 'baidu' ? 'fill-primary' : '')}
             />
           ) : engine === 'google' ? (
             <GoogleIcon
               onClick={() => setSearchEngine('google')}
-              className={cn(
-                'fill-muted-foreground/50 mr-2 cursor-pointer',
-                searchEngine === 'google' ? 'fill-primary' : '',
-              )}
+              className={cn(searchEngine === 'google' ? 'fill-primary' : '')}
             />
           ) : engine === 'duckduckgo' ? (
             <DuckduckgoIcon
               onClick={() => setSearchEngine('duckduckgo')}
               className={cn(
-                'fill-muted-foreground/50 mr-2 cursor-pointer',
                 searchEngine === 'duckduckgo' ? 'fill-primary' : '',
               )}
             />

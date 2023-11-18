@@ -1,27 +1,26 @@
-import Browser from 'webextension-polyfill'
-import React, { useEffect, useRef, useState } from 'react'
+import browser from 'webextension-polyfill'
+import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINE } from '@/lib/constants'
-import { FavItem, useFavStore } from '@/store'
+import { FavItem, useFavStore, SearchEngine, useSearchStore } from '@/store'
 
 import { Search } from 'lucide-react'
-import { SearchEngine, SearchEngineButtons } from './search-engine-buttons'
+import { SearchEngineButtons } from './search-engine-buttons'
 
 export const SearchInput = () => {
   const favList = useFavStore((state) => state.favList)
   const isExpendFav = useFavStore((state) => state.isExpend)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const searchEngineList = useSearchStore((state) => state.searchEngineList)
 
   const [inputValue, setInputValue] = useState('')
-  const searchInputRef = useRef<HTMLInputElement>(null)
-
   const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
     'bz:search-engine',
-    'bing',
+    searchEngineList[0],
   )
-
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINE[searchEngine!] || '',
+    SEARCH_ENGINE[searchEngine!],
   )
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
@@ -64,12 +63,14 @@ export const SearchInput = () => {
     if (e.key === 'Enter') handleEnter(e)
   }
 
+  let index = searchEngineList.indexOf(searchEngine)
   const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (searchEngine === 'bing') setSearchEngine('google')
-    else if (searchEngine === 'google') setSearchEngine('baidu')
-    else if (searchEngine === 'baidu') setSearchEngine('duckduckgo')
-    else if (searchEngine === 'duckduckgo') setSearchEngine('bing')
+
+    if (index === searchEngineList.length - 1) {
+      index = 0
+      setSearchEngine(searchEngineList[index])
+    } else setSearchEngine(searchEngineList[++index])
   }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -164,10 +165,10 @@ export const SearchInput = () => {
           focus:rounded-md`,
           isSeachFieldFocus && 'border-primary',
         )}
-        placeholder={Browser.i18n.getMessage('input_placeholder')}
+        placeholder={browser.i18n.getMessage('input_placeholder')}
       />
 
-      {/* Search Engien Buttons */}
+      {/* Search Engine Buttons */}
       <SearchEngineButtons
         searchEngine={searchEngine}
         setSearchEngine={setSearchEngine}
