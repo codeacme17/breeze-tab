@@ -17,12 +17,17 @@ export const useSearchStore = create<SearchState>((set) => {
   }
 
   return {
-    searchEngineList:
-      JSON.parse(localStorage.getItem('dz:search-engine-list')!) || [],
+    searchEngineList: JSON.parse(
+      localStorage.getItem('dz:search-engine-list')!,
+    ),
 
     setSearchEngineList: (searchEngineList: SearchEngine[]) => {
       set((state) => {
         state.searchEngineList = searchEngineList
+        localStorage.setItem(
+          'dz:search-engine-list',
+          JSON.stringify(searchEngineList),
+        )
         return { searchEngineList }
       })
     },
