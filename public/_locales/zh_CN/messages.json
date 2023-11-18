@@ -19,6 +19,9 @@
   "setting_show_fav_list": {
     "message": "展开收藏列表"
   },
+  "setting_search_engine": {
+    "message": "搜索引擎"
+  },
   "setting_color": {
     "message": "配色"
   },

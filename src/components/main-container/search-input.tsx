@@ -1,28 +1,24 @@
-import Browser from 'webextension-polyfill'
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocalStorage } from 'react-use'
+import browser from 'webextension-polyfill'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { SEARCH_ENGINE } from '@/lib/constants'
-import { FavItem, useFavStore } from '@/store'
+import { SEARCH_ENGINES } from '@/lib/constants'
+import { FavItem, useFavStore, useSearchStore } from '@/store'
 
 import { Search } from 'lucide-react'
-import { BaiduIcon, BingIcon, GoogleIcon } from '@/components/icons'
-
-type SearchEngine = 'google' | 'bing' | 'baidu' | undefined
+import { SearchEngineButtons } from './search-engine-buttons'
 
 export const SearchInput = () => {
   const favList = useFavStore((state) => state.favList)
   const isExpendFav = useFavStore((state) => state.isExpend)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const searchEngineList = useSearchStore((state) => state.searchEngineList)
 
   const [inputValue, setInputValue] = useState('')
-  const searchInputRef = useRef<HTMLInputElement>(null)
+  const searchEngine = useSearchStore((state) => state.searchEngine)
+  const setSearchEngine = useSearchStore((state) => state.setSearchEngine)
 
-  const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
-    'bz:search-engine',
-    'bing',
-  )
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINE[searchEngine!] || '',
+    SEARCH_ENGINES[searchEngine!],
   )
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
@@ -65,11 +61,14 @@ export const SearchInput = () => {
     if (e.key === 'Enter') handleEnter(e)
   }
 
+  let index = searchEngineList.indexOf(searchEngine!)
   const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (searchEngine === 'bing') setSearchEngine('google')
-    else if (searchEngine === 'google') setSearchEngine('baidu')
-    else if (searchEngine === 'baidu') setSearchEngine('bing')
+
+    if (index === searchEngineList.length - 1) {
+      index = 0
+      setSearchEngine(searchEngineList[index])
+    } else setSearchEngine(searchEngineList[++index])
   }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -111,7 +110,7 @@ export const SearchInput = () => {
   }
 
   useEffect(() => {
-    setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
+    setSearchEngineUrl(SEARCH_ENGINES[searchEngine!] || '')
   }, [searchEngine])
 
   return (
@@ -164,43 +163,11 @@ export const SearchInput = () => {
           focus:rounded-md`,
           isSeachFieldFocus && 'border-primary',
         )}
-        placeholder={Browser.i18n.getMessage('input_placeholder')}
+        placeholder={browser.i18n.getMessage('input_placeholder')}
       />
 
-      {/* Search Engien Buttons */}
-      <div
-        className={`
-          absolute 
-          top-1/2 
-          -translate-y-1/2 
-          right-4 
-          flex 
-          items-center 
-          ease-in-out 
-          duration-300 
-          transition-[fill,opacity]`}>
-        <BingIcon
-          onClick={() => setSearchEngine('bing')}
-          className={cn(
-            'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'bing' ? 'fill-primary' : '',
-          )}
-        />
-        <GoogleIcon
-          onClick={() => setSearchEngine('google')}
-          className={cn(
-            'fill-muted-foreground/50 mr-2 cursor-pointer',
-            searchEngine === 'google' ? 'fill-primary' : '',
-          )}
-        />
-        <BaiduIcon
-          onClick={() => setSearchEngine('baidu')}
-          className={cn(
-            'fill-muted-foreground/50 cursor-pointer',
-            searchEngine === 'baidu' ? 'fill-primary' : '',
-          )}
-        />
-      </div>
+      {/* Search Engine Buttons */}
+      <SearchEngineButtons />
     </section>
   )
 }

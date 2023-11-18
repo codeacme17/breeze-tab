@@ -19,6 +19,9 @@
   "setting_show_fav_list": {
     "message": "Show Fav-List"
   },
+  "setting_search_engine": {
+    "message": "Search Engine"
+  },
   "setting_color": {
     "message": "Color"
   },
