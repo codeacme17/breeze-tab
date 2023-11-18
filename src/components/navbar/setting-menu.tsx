@@ -28,6 +28,8 @@ export const SettingMenu = () => {
 
   const [color, setColor] = useLocalStorage<Color>('color', 'gray')
   const [colorCollection, setColorCollection] = useState<string[]>([])
+  const searchEngine = useSearchStore((state) => state.searchEngine)
+  const setSearchEngine = useSearchStore((state) => state.setSearchEngine)
   const searchEngineList = useSearchStore((state) => state.searchEngineList)
   const setSearchEngineList = useSearchStore(
     (state) => state.setSearchEngineList,
@@ -35,12 +37,24 @@ export const SettingMenu = () => {
 
   const handleCheckedChange = (checked: boolean, engine: SearchEngine) => {
     if (searchEngineList.length === 1 && !checked) return
+    if (searchEngineList.length === 3 && checked) return
 
     if (checked) {
       setSearchEngineList([...searchEngineList, engine])
     } else {
-      setSearchEngineList(searchEngineList.filter((item) => item !== engine))
+      const newSearchEngineList = searchEngineList.filter(
+        (item) => item !== engine,
+      )
+      setSearchEngineList(newSearchEngineList)
+      if (searchEngine === engine) setSearchEngine(newSearchEngineList[0])
     }
+  }
+
+  const disableCheckBoxState = (engine: SearchEngine) => {
+    return (
+      (searchEngineList.length === 1 && searchEngineList[0] === engine) ||
+      (searchEngineList.length === 3 && !searchEngineList.includes(engine))
+    )
   }
 
   useEffect(() => {
@@ -97,7 +111,10 @@ export const SettingMenu = () => {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuLabel>Search Engines</DropdownMenuLabel>
+        {/* Seach Engines */}
+        <DropdownMenuLabel>
+          {browser.i18n.getMessage('setting_search_engine')}
+        </DropdownMenuLabel>
         <DropdownMenuItem className="flex flex-col justify-start items-start gap-1">
           {Object.keys(SEARCH_ENGINES).map((engine) => (
             <div key={engine} className="flex">
@@ -107,15 +124,16 @@ export const SettingMenu = () => {
                 onCheckedChange={(checked: boolean) =>
                   handleCheckedChange(checked, engine as SearchEngine)
                 }
-                disabled={
-                  searchEngineList.length === 1 &&
-                  searchEngineList[0] === engine
-                }
+                disabled={disableCheckBoxState(engine as SearchEngine)}
               />
               <label
                 htmlFor={engine}
-                className="ml-2 cursor-pointer text-muted-foreground">
-                {engine}
+                className={cn(
+                  'ml-2 cursor-pointer',
+                  disableCheckBoxState(engine as SearchEngine) &&
+                    'cursor-not-allowed text-muted-foreground',
+                )}>
+                {engine.charAt(0).toUpperCase() + engine.slice(1)}
               </label>
             </div>
           ))}

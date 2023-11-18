@@ -1,9 +1,8 @@
 import browser from 'webextension-polyfill'
 import { useEffect, useRef, useState } from 'react'
-import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
 import { SEARCH_ENGINES } from '@/lib/constants'
-import { FavItem, useFavStore, SearchEngine, useSearchStore } from '@/store'
+import { FavItem, useFavStore, useSearchStore } from '@/store'
 
 import { Search } from 'lucide-react'
 import { SearchEngineButtons } from './search-engine-buttons'
@@ -15,10 +14,9 @@ export const SearchInput = () => {
   const searchEngineList = useSearchStore((state) => state.searchEngineList)
 
   const [inputValue, setInputValue] = useState('')
-  const [searchEngine, setSearchEngine] = useLocalStorage<SearchEngine>(
-    'bz:search-engine',
-    searchEngineList[0],
-  )
+  const searchEngine = useSearchStore((state) => state.searchEngine)
+  const setSearchEngine = useSearchStore((state) => state.setSearchEngine)
+
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
     SEARCH_ENGINES[searchEngine!],
   )
@@ -169,10 +167,7 @@ export const SearchInput = () => {
       />
 
       {/* Search Engine Buttons */}
-      <SearchEngineButtons
-        searchEngine={searchEngine!}
-        setSearchEngine={setSearchEngine}
-      />
+      <SearchEngineButtons />
     </section>
   )
 }

@@ -8,22 +8,16 @@ import {
   DuckduckgoIcon,
 } from '@/components/icons'
 
-interface SearchEngineButtonsProps {
-  searchEngine: SearchEngine
-  setSearchEngine: (engine: SearchEngine) => void
-}
-
 interface SearchEngineIconProps {
   engine: SearchEngine
   selected: boolean
   hanldeClick: (engine: SearchEngine) => void
 }
 
-export const SearchEngineButtons = ({
-  searchEngine,
-  setSearchEngine,
-}: SearchEngineButtonsProps) => {
+export const SearchEngineButtons = () => {
+  const searchEngine = useSearchStore((state) => state.searchEngine)
   const searchEngineList = useSearchStore((state) => state.searchEngineList)
+  const setSearchEngine = useSearchStore((state) => state.setSearchEngine)
 
   return (
     <div
