@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill'
 import { useEffect, useRef, useState } from 'react'
 import { useLocalStorage } from 'react-use'
 import { cn } from '@/lib/utils'
-import { SEARCH_ENGINE } from '@/lib/constants'
+import { SEARCH_ENGINES } from '@/lib/constants'
 import { FavItem, useFavStore, SearchEngine, useSearchStore } from '@/store'
 
 import { Search } from 'lucide-react'
@@ -20,7 +20,7 @@ export const SearchInput = () => {
     searchEngineList[0],
   )
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINE[searchEngine!],
+    SEARCH_ENGINES[searchEngine!],
   )
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
@@ -63,7 +63,7 @@ export const SearchInput = () => {
     if (e.key === 'Enter') handleEnter(e)
   }
 
-  let index = searchEngineList.indexOf(searchEngine)
+  let index = searchEngineList.indexOf(searchEngine!)
   const switchEngine = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
 
@@ -112,7 +112,7 @@ export const SearchInput = () => {
   }
 
   useEffect(() => {
-    setSearchEngineUrl(SEARCH_ENGINE[searchEngine!] || '')
+    setSearchEngineUrl(SEARCH_ENGINES[searchEngine!] || '')
   }, [searchEngine])
 
   return (
@@ -170,7 +170,7 @@ export const SearchInput = () => {
 
       {/* Search Engine Buttons */}
       <SearchEngineButtons
-        searchEngine={searchEngine}
+        searchEngine={searchEngine!}
         setSearchEngine={setSearchEngine}
       />
     </section>

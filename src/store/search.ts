@@ -1,11 +1,7 @@
 import { create } from 'zustand'
+import { SEARCH_ENGINES } from '@/lib/constants'
 
-export type SearchEngine =
-  | 'google'
-  | 'bing'
-  | 'baidu'
-  | 'duckduckgo'
-  | undefined
+export type SearchEngine = keyof typeof SEARCH_ENGINES
 
 interface SearchState {
   searchEngineList: SearchEngine[]

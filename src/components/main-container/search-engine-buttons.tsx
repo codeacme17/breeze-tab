@@ -13,6 +13,12 @@ interface SearchEngineButtonsProps {
   setSearchEngine: (engine: SearchEngine) => void
 }
 
+interface SearchEngineIconProps {
+  engine: SearchEngine
+  selected: boolean
+  hanldeClick: (engine: SearchEngine) => void
+}
+
 export const SearchEngineButtons = ({
   searchEngine,
   setSearchEngine,
@@ -34,34 +40,38 @@ export const SearchEngineButtons = ({
         gap-2
       `}>
       {searchEngineList.map((engine: SearchEngine) => (
-        <div key={engine} className="fill-muted-foreground/50 cursor-pointer">
-          {engine === 'bing' ? (
-            <BingIcon
-              onClick={() => setSearchEngine('bing')}
-              className={cn(searchEngine === 'bing' ? 'fill-primary' : '')}
-            />
-          ) : engine === 'baidu' ? (
-            <BaiduIcon
-              onClick={() => setSearchEngine('baidu')}
-              className={cn(searchEngine === 'baidu' ? 'fill-primary' : '')}
-            />
-          ) : engine === 'google' ? (
-            <GoogleIcon
-              onClick={() => setSearchEngine('google')}
-              className={cn(searchEngine === 'google' ? 'fill-primary' : '')}
-            />
-          ) : engine === 'duckduckgo' ? (
-            <DuckduckgoIcon
-              onClick={() => setSearchEngine('duckduckgo')}
-              className={cn(
-                searchEngine === 'duckduckgo' ? 'fill-primary' : '',
-              )}
-            />
-          ) : (
-            <></>
-          )}
-        </div>
+        <SearchEngineIcon
+          key={engine}
+          engine={engine}
+          selected={engine === searchEngine}
+          hanldeClick={setSearchEngine}
+        />
       ))}
     </div>
+  )
+}
+
+const SearchEngineIcon = ({
+  engine,
+  selected,
+  hanldeClick,
+}: SearchEngineIconProps) => {
+  const icons = {
+    bing: BingIcon,
+    baidu: BaiduIcon,
+    google: GoogleIcon,
+    duckduckgo: DuckduckgoIcon,
+  }
+
+  const IconComponent = icons[engine]
+
+  return (
+    <IconComponent
+      onClick={() => hanldeClick(engine)}
+      className={cn(
+        selected ? 'fill-primary' : 'fill-muted-foreground/50',
+        'cursor-pointer',
+      )}
+    />
   )
 }
