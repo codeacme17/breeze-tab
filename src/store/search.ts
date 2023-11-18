@@ -14,7 +14,7 @@ export const useSearchStore = create<SearchState>((set) => {
   if (!localStorage.getItem('dz:search-engine-list')) {
     localStorage.setItem(
       'dz:search-engine-list',
-      JSON.stringify(['google', 'bing', 'baidu']),
+      JSON.stringify(['bing', 'google', 'baidu']),
     )
   }
 
