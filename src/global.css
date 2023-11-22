@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  @import 'react-lazy-load-image-component/src/effects/blur.css';
-
   * {
     @apply border-border;
   }
