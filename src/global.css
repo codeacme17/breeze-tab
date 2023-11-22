@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+  @import 'react-lazy-load-image-component/src/effects/blur.css';
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    height: 3px;
+    background-color: hsl(var(--muted));
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -47,24 +67,4 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 3px;
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  height: 3px;
-  background-color: hsl(var(--muted));
 }

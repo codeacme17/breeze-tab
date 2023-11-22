@@ -1,4 +1,4 @@
-import Browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 import { useState } from 'react'
 import { FavItem, useFavStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -90,14 +90,14 @@ export const FavList = () => {
             rounded-lg 
             cursor-pointer
             `,
-            isDragging ? '' : 'hover:bg-muted/70',
+            isDragging ? '' : 'hover:bg-muted/70'
           )}>
           <div className="w-12 h-12 rounded-full flex justify-center items-center bg-muted-foreground/20">
             <Plus className="w-6 h-6 stroke-muted-foreground" />
           </div>
 
           <p className="text-sm mt-2 text-muted-foreground/70">
-            {Browser.i18n.getMessage('fav_add')}
+            {browser.i18n.getMessage('fav_add')}
           </p>
         </div>
       </ReactSortable>

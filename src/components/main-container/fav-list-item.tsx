@@ -1,16 +1,14 @@
+import browser from 'webextension-polyfill'
 import { cn } from '@/lib/utils'
 import { FavItem } from '@/store'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css'
-
+import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
 import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
-import { Pencil, Trash2, GripHorizontal } from 'lucide-react'
-import Browser from 'webextension-polyfill'
 
 interface FavListItemProps {
   item: FavItem
@@ -48,7 +46,7 @@ export const FavListItem = ({
             rounded-lg 
           `,
           isDragging ? 'cursor-grabbing' : 'hover:bg-muted/70 cursor-pointer',
-          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : '',
+          currentDraggingIndex === index ? 'shadow-lg bg-muted/70' : ''
         )}>
         <div onClick={() => window.location.assign(item.url)}>
           <div
@@ -75,7 +73,7 @@ export const FavListItem = ({
               'handle absolute right-2 top-2 transition-opacity opacity-0 ',
               isDragging
                 ? 'opacity-0 cursor-grabbing'
-                : 'group-hover:opacity-100 cursor-grab',
+                : 'group-hover:opacity-100 cursor-grab'
             )}>
             <GripHorizontal className="stroke-muted-foreground" />
           </div>
@@ -88,11 +86,11 @@ export const FavListItem = ({
         <ContextMenuContent className="bg-background">
           <ContextMenuItem onClick={() => onModify(item)}>
             <Pencil className="w-4 h-4 mr-2" />
-            {Browser.i18n.getMessage('right_memu_modify')}
+            {browser.i18n.getMessage('right_memu_modify')}
           </ContextMenuItem>
           <ContextMenuItem onClick={() => onRemove(item)}>
             <Trash2 className="w-4 h-4 mr-2" />
-            {Browser.i18n.getMessage('right_memu_delete')}
+            {browser.i18n.getMessage('right_memu_delete')}
           </ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuTrigger>
