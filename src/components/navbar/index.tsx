@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 import { version } from '../../../package.json'
-import Browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 
 import {
   Dialog,
@@ -55,7 +55,7 @@ export const Navbar = () => {
               </div>
               <h2 className="text-2xl">Breeze Tab</h2>
               <h4 className="mb-4 mt-1 text-muted-foreground text-base">
-                {Browser.i18n.getMessage('extension_slogan')}
+                {browser.i18n.getMessage('extension_slogan')}
               </h4>
               <p className="text-sm">
                 <code className="px-2 py-0.5 bg-secondary-foreground/30 rounded-lg">

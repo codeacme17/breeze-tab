@@ -1,4 +1,4 @@
-import Browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 import { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { FavItem, useFavStore } from '@/store'
@@ -12,14 +12,14 @@ import { Construction } from 'lucide-react'
 const Popup = () => {
   const addFav = useFavStore((state) => state.addFav)
 
-  const [currentPageInfo, setCurrentPageInfo] = useState<Browser.Tabs.Tab>()
+  const [currentPageInfo, setCurrentPageInfo] = useState<browser.Tabs.Tab>()
   const [isValidUrl, setIsValidUrl] = useState(false)
   const [label, setLabel] = useState('')
   const [shortKey, setShortKey] = useState('')
 
   useEffect(() => {
     const getCurrentPageInfo = async () => {
-      const tabs = await Browser.tabs.query({
+      const tabs = await browser.tabs.query({
         active: true,
         currentWindow: true,
       })
@@ -27,7 +27,7 @@ const Popup = () => {
       setIsValidUrl(
         tabs[0]?.url?.startsWith('http') ||
           tabs[0]?.url?.startsWith('https') ||
-          false,
+          false
       )
       setCurrentPageInfo(tabs[0])
       setLabel(tabs[0]?.title || '')
@@ -65,12 +65,12 @@ const Popup = () => {
     <section className="flex flex-col justify-center text-foreground w-96 p-3">
       <h2 className="text-lg flex items-center select-none">
         <img src="/logo.png" className="w-6 h-6 mr-2" />
-        {Browser.i18n.getMessage('popup_add_current')}
+        {browser.i18n.getMessage('popup_add_current')}
       </h2>
 
       <form onSubmit={handleAdd} className="mt-3">
         <Label>
-          {Browser.i18n.getMessage('fav_dialog_form_label')}{' '}
+          {browser.i18n.getMessage('fav_dialog_form_label')}{' '}
           <span className="text-primary">*</span>
         </Label>
         <Input
@@ -82,7 +82,7 @@ const Popup = () => {
           }}
         />
 
-        <Label>{Browser.i18n.getMessage('fav_dialog_form_short_key')}</Label>
+        <Label>{browser.i18n.getMessage('fav_dialog_form_short_key')}</Label>
         <Input
           className="h-9 mt-1"
           placeholder="g"
@@ -96,7 +96,7 @@ const Popup = () => {
           variant="secondary"
           disabled={!label.trim()}
           type="submit">
-          {Browser.i18n.getMessage('fav_dialog_form_confirm')}
+          {browser.i18n.getMessage('fav_dialog_form_confirm')}
         </Button>
       </form>
     </section>
@@ -108,7 +108,7 @@ const ErroHint = () => {
     <section className="w-60 text-center h-28 flex flex-col justify-center items-center select-none">
       <Construction className="mb-1" />
       <p>Oops...</p>
-      <p>{Browser.i18n.getMessage('hint_invalid_page')}</p>
+      <p>{browser.i18n.getMessage('hint_invalid_page')}</p>
     </section>
   )
 }
