@@ -11,6 +11,7 @@ import { FavListItem } from './fav-list-item'
 
 export const FavList = () => {
   const favList = useFavStore((state) => state.favList)
+  const isExpendFav = useFavStore((state) => state.isExpend)
   const setFavList = useFavStore((state) => state.setFavList)
   const removeFav = useFavStore((state) => state.removeFav)
 
@@ -46,6 +47,8 @@ export const FavList = () => {
   const handleRemove = (item: FavItem) => {
     removeFav(item)
   }
+
+  if (!isExpendFav) return null
 
   return (
     <section className="h-[400px] w-full overflow-y-scroll mt-5 scroll-smooth">
