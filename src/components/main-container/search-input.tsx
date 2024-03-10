@@ -18,7 +18,7 @@ export const SearchInput = () => {
   const setSearchEngine = useSearchStore((state) => state.setSearchEngine)
 
   const [searchEngineUrl, setSearchEngineUrl] = useState<string>(
-    SEARCH_ENGINES[searchEngine!]
+    SEARCH_ENGINES[searchEngine!],
   )
 
   // Current Fav Item is user enter the shortkey whitch is match the fav item
@@ -42,14 +42,14 @@ export const SearchInput = () => {
 
   const checkIsShortKey = (inputValue: string) => {
     const matchItem = favList.find(
-      (item) => item.shortKey === inputValue.toLowerCase()
+      (item) => item.shortKey === inputValue.toLowerCase(),
     )
     setCurrentFavItem(matchItem || null)
   }
 
   const checkIsSearchField = (chunks: string[]) => {
     const matchItem = favList.find(
-      (item) => item.shortKey === chunks[0].toLowerCase()
+      (item) => item.shortKey === chunks[0].toLowerCase(),
     )
     if (!matchItem?.searchField) return
     setCurrentFavItem(matchItem)
@@ -117,7 +117,7 @@ export const SearchInput = () => {
     <section
       className={cn(
         'w-full relative transition-[margin]',
-        isExpendFav ? 'mt-40' : 'mt-56'
+        isExpendFav ? 'mt-40' : 'mt-56',
       )}>
       <label
         className="absolute left-0 top-0 z-10 flex justify-center items-center h-full w-14"
@@ -149,7 +149,6 @@ export const SearchInput = () => {
           pl-14
           pr-32 
           text-base 
-          font-light
           outline-none 
           rounded-3xl 
           ease-in-out 
@@ -162,7 +161,7 @@ export const SearchInput = () => {
           placeholder:text-base 
           placeholder:select-none 
           focus:rounded-md`,
-          isSeachFieldFocus && 'border-primary'
+          isSeachFieldFocus && 'border-primary',
         )}
         placeholder={browser.i18n.getMessage('input_placeholder')}
       />
