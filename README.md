@@ -27,9 +27,8 @@ Users can quickly switch search engines by pressing the `tab` key after focusing
 Users can add favorites in two ways:
 
 - After visiting a website, click on the breeze tab icon in the browser extension to pop up a form to bookmark the site. Clicking `Confirm` will add the site to the favorites list (recommended).
-  
+
   <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/3d2f30e0-d267-4778-8137-3d5d11e78eb4" />
-  
 
 - Click the `Add New` button in the favorites list and enter the URL you want to bookmark.
 
@@ -38,7 +37,6 @@ Users can add favorites in two ways:
 Users can add `shortcut key` to their bookmarked URLs. This is done by setting the `shortcut field` in the bookmark form. Once set, users can enter the shortcut field in the search box to directly navigate to that URL.
 
 <img width="600" src="https://github.com/codeacme17/breeze-tab/assets/67408722/fd8d7699-d59d-4320-b27d-216857f6e992" />
-
 
 ### Search Field
 
@@ -51,19 +49,22 @@ Users can add `search fields` to their bookmarked URLs. This is done by setting 
 
 ## 📦 Download
 
-<p>
-  <!--
-  <a href="">
-    <img height="60" src="https://blog.mozilla.org/addons/files/2020/04/get-the-addon-fx-apr-2020.svg">
-  </a>
-  -->
-  <a href="https://chromewebstore.google.com/detail/breeze-tab/hphploadgopiogppepboclkiaiphfokl?hl=en-US&utm_source=ext_sidebar">
-    <img height="60" src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png"/>
-  </a>
-  <a href="https://microsoftedge.microsoft.com/addons/detail/breeze-tab/bphpgnckmljhojpeojbhkbihlclphban">
-    <img height="60" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/320px-Get_it_from_Microsoft_Badge.svg.png"/>
-  </a>
-</p>
+<table cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="center">
+      <a align="center" href="https://chromewebstore.google.com/detail/breeze-tab/hphploadgopiogppepboclkiaiphfokl?hl=en-US&utm_source=ext_sidebar">
+        <img height="60"  src="https://user-images.githubusercontent.com/22908993/166417152-f870bfbd-1770-4c28-b69d-a7303aebc9a6.png" alt="Chrome web store" />
+        <p align="center">Chrome Web Store</p>
+      </a>
+    </td>
+    <td valign="center">
+      <a href="https://microsoftedge.microsoft.com/addons/detail/breeze-tab/bphpgnckmljhojpeojbhkbihlclphban"/>
+      <img height="60"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/320px-Get_it_from_Microsoft_Badge.svg.png"  alt="Microsoft web store" />
+        <p align="center">Microsoft Web Store</p>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## Demo
 
