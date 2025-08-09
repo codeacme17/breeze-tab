@@ -20,6 +20,8 @@ export default defineConfig({
     react(),
     webExtension({
       manifest: generateManifest,
+      // Skip online schema validation to avoid network/redirect issues during build
+      skipManifestValidation: true,
       additionalInputs: ['index.html'],
     }),
   ],
